@@ -21,8 +21,4 @@
     <ProjectReference Include="..\Perfect.Infrastructure\Perfect.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Endpoints\V1\Orders\Dtos\" />
-  </ItemGroup>
-
 </Project>

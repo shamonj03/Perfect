@@ -4,11 +4,11 @@ namespace Perfect.Api.Common.Extensions
 {
     public static class ResultExtenions
     {
-        public static IResult ToEnvelope(this CSharpFunctionalExtensions.Result result)
+        public static IResult ToEnvelope(this CSharpFunctionalExtensions.Result result, int statusCode = StatusCodes.Status200OK)
         {
             if (result.IsSuccess)
             {
-                return Results.Ok();
+                return Results.StatusCode(statusCode);
             }
 
             return Results.BadRequest(new Envelope(result.Error));
