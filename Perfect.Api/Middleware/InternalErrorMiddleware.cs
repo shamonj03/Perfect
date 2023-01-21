@@ -1,4 +1,5 @@
-﻿using Perfect.Api.Common.Models;
+﻿using FluentValidation;
+using Perfect.Api.Common.Models;
 
 namespace Perfect.Api.Middleware
 {
@@ -16,6 +17,13 @@ namespace Perfect.Api.Middleware
             try
             {
                 await _next(httpContext);
+            }
+            catch(ValidationException ex)
+            {
+                var error = ex.Errors.First();
+                var envelope = new Envelope(error.ErrorMessage);
+                httpContext.Response.StatusCode = int.Parse(error.ErrorCode);
+                await httpContext.Response.WriteAsJsonAsync(envelope);
             }
             catch (Exception ex)
             {

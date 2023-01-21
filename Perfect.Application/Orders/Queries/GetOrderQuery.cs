@@ -1,4 +1,4 @@
 ﻿namespace Perfect.Application.Orders.Queries
 {
-    public record GetOrderQuery(int id);
+    public record GetOrderQuery(int Id);
 }

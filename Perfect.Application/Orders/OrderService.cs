@@ -16,7 +16,7 @@ namespace Perfect.Application.Orders
 
         public Result<OrderModel> GetOrder(GetOrderQuery query)
         {
-            var result = _orderFactory.Create(query.id);
+            var result = _orderFactory.Create(query.Id);
 
             return result
                 .MapTry(order => new OrderModel(order.Id, order.Name, order.Description, order.Price, new OrderUserModel(order.User.Name)));

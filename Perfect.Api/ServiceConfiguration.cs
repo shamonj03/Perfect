@@ -1,4 +1,4 @@
-﻿using Asp.Versioning;
+﻿using FluentValidation;
 using Microsoft.Extensions.Options;
 using Perfect.Api.Configuration;
 using Perfect.Application.Orders;
@@ -35,6 +35,8 @@ namespace Perfect.Api
 
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
             services.AddSwaggerGen(options => options.OperationFilter<SwaggerDefaultValues>());
+
+            services.AddValidatorsFromAssemblyContaining<Program>();
 
             services.AddScoped<IUserFactory, UserFactory>();
             

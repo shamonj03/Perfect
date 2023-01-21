@@ -12,6 +12,7 @@ namespace Perfect.Api
 
             app.NewVersionedApi()
                 .MapGroup("/api/v{version:apiVersion}")
+                .WithOpenApi()
                 .RegisterEndpointModules();
 
             // Configure the HTTP request pipeline.

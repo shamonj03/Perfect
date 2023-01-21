@@ -14,6 +14,7 @@ namespace Perfect.Api.Endpoints.V1.Orders
 
             group
                 .MapGet("/{id:int}", GetOrderRoute.Execute)
+                .WithTags("Get Order")
                 .Produces<OrderModel>(StatusCodes.Status200OK)
                 .Produces<Envelope>(StatusCodes.Status400BadRequest);
         }

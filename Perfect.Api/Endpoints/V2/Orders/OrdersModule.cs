@@ -9,7 +9,8 @@ namespace Perfect.Api.Endpoints.V2.Orders
             var group = endpoints.MapGroup("orders")
                 .HasApiVersion(2.0);
 
-            group.MapGet("/exception", _ => throw new InvalidOperationException("Sample Exception"));
+            group.MapGet("/exception", () => { throw new InvalidOperationException("Sample Exception"); })
+                .WithTags("Exception");
         }
     }
 }
