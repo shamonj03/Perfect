@@ -1,24 +1,25 @@
-﻿using Perfect.Api.Common.Models;
+﻿using CSharpFunctionalExtensions;
+using Perfect.Api.Common.Models;
 
 namespace Perfect.Api.Common.Extensions
 {
     public static class ResultExtenions
     {
-        public static IResult ToEnvelope(this CSharpFunctionalExtensions.Result result, int statusCode = StatusCodes.Status200OK)
+        public static Microsoft.AspNetCore.Http.IResult ToEnvelope<T>(this Result<T> result)
         {
             if (result.IsSuccess)
             {
-                return Results.StatusCode(statusCode);
+                return Results.Ok(result.Value);
             }
 
             return Results.BadRequest(new Envelope(result.Error));
         }
 
-        public static IResult ToEnvelope<T>(this CSharpFunctionalExtensions.Result<T> result)
+        public static Microsoft.AspNetCore.Http.IResult ToEnvelope<T, TRespone>(this Result<T> result, Func<T, TRespone> map)
         {
             if (result.IsSuccess)
             {
-                return Results.Ok(result.Value);
+                return Results.Ok(result.Map(map).Value);
             }
 
             return Results.BadRequest(new Envelope(result.Error));

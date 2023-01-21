@@ -1,5 +1,4 @@
-﻿using CSharpFunctionalExtensions;
-using FluentValidation;
+﻿using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Perfect.Api.Common.Extensions;
 using Perfect.Api.Endpoints.v1.Orders.Requests;
@@ -11,7 +10,7 @@ namespace Perfect.Api.Endpoints.v1.Orders.Routes
 {
     public static class GetOrderRoute
     {
-        public static async Task<Microsoft.AspNetCore.Http.IResult> Execute
+        public static async Task<IResult> Execute
             ([FromServices] IOrderService orderService,
             [FromServices] IValidator<GetOrderRequest> validator, 
             [AsParameters] GetOrderRequest request)
@@ -20,8 +19,8 @@ namespace Perfect.Api.Endpoints.v1.Orders.Routes
 
             return orderService
                 .GetOrder(new GetOrderQuery(request.Id))
-                .Map(order => new OrderDto(order.Id, order.Name, order.Description, order.Price, order.User.Name))
-                .ToEnvelope();
+                .ToEnvelope(order => 
+                    new OrderDto(order.Id, order.Name, order.Description, order.Price, order.User.Name));
         }
     }
 }

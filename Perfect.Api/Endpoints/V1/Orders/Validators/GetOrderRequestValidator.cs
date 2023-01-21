@@ -1,7 +1,5 @@
 ﻿using FluentValidation;
 using Perfect.Api.Endpoints.v1.Orders.Requests;
-using Perfect.Api.Endpoints.V1.Orders.Dtos;
-using Perfect.Application.Orders.Queries;
 
 namespace Perfect.Api.Endpoints.V1.Orders.Validators
 {
