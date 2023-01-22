@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Perfect.Application\Perfect.Application.csproj" />
+    <ProjectReference Include="..\Perfect.Infrastructure.Persistence\Perfect.Infrastructure.Persistence.csproj" />
     <ProjectReference Include="..\Perfect.Infrastructure\Perfect.Infrastructure.csproj" />
   </ItemGroup>
 

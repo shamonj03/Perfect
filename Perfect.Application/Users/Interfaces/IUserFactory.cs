@@ -5,6 +5,6 @@ namespace Perfect.Application.Users.Interfaces
 {
     public interface IUserFactory
     {
-        Result<User> Create(int id);
+        Result<User> Create(Guid id);
     }
 }

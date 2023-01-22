@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perfect.Api", "Perfect.Api\Perfect.Api.csproj", "{78264EC7-9365-49FC-8AC7-6F0F5D651A2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Perfect.Api", "Perfect.Api\Perfect.Api.csproj", "{78264EC7-9365-49FC-8AC7-6F0F5D651A2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perfect.Application", "Perfect.Application\Perfect.Application.csproj", "{6BCD712B-CE42-4F4B-A080-B61711D6EAAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Perfect.Application", "Perfect.Application\Perfect.Application.csproj", "{6BCD712B-CE42-4F4B-A080-B61711D6EAAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perfect.Domain", "Perfect.Domain\Perfect.Domain.csproj", "{D079CFC3-DE45-4D31-AB9E-BA54F3F0DE86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Perfect.Domain", "Perfect.Domain\Perfect.Domain.csproj", "{D079CFC3-DE45-4D31-AB9E-BA54F3F0DE86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perfect.Infrastructure", "Perfect.Infrastructure\Perfect.Infrastructure.csproj", "{8B5E5AC9-1F9E-48E4-AFBD-4F7C3ED6742D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Perfect.Infrastructure", "Perfect.Infrastructure\Perfect.Infrastructure.csproj", "{8B5E5AC9-1F9E-48E4-AFBD-4F7C3ED6742D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perfect.Infrastructure.Persistence", "Perfect.Infrastructure.Persistence\Perfect.Infrastructure.Persistence.csproj", "{E064C48B-7F5E-450F-9D00-708823E93279}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{8B5E5AC9-1F9E-48E4-AFBD-4F7C3ED6742D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B5E5AC9-1F9E-48E4-AFBD-4F7C3ED6742D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B5E5AC9-1F9E-48E4-AFBD-4F7C3ED6742D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E064C48B-7F5E-450F-9D00-708823E93279}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E064C48B-7F5E-450F-9D00-708823E93279}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E064C48B-7F5E-450F-9D00-708823E93279}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E064C48B-7F5E-450F-9D00-708823E93279}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -8,9 +8,7 @@ namespace Perfect.Api.Endpoints.V1.Orders.Validators
         public GetOrderRequestValidator()
         {
             RuleFor(x => x.Id)
-                .GreaterThan(0)
-                .WithErrorCode(StatusCodes.Status404NotFound.ToString())
-                .WithMessage("Id must be greater than zero.");
+                .NotEmpty();
         }
     }
 }

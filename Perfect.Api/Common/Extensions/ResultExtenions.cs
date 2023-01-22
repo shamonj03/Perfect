@@ -24,5 +24,17 @@ namespace Perfect.Api.Common.Extensions
 
             return Results.BadRequest(new Envelope(result.Error));
         }
+
+        public static async Task<Microsoft.AspNetCore.Http.IResult> ToEnvelope<T, TRespone>(this Task<Result<T>> task, Func<T, TRespone> map)
+        {
+            var result = await task;
+
+            if (result.IsSuccess)
+            {
+                return Results.Ok(result.Map(map).Value);
+            }
+
+            return Results.BadRequest(new Envelope(result.Error));
+        }
     }
 }

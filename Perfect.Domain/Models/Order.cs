@@ -2,7 +2,7 @@
 {
     public class Order
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
 
@@ -12,12 +12,12 @@
 
         public User User { get; set; }
 
-        public Order(int id, User user)
+        public Order(Guid id, User user)
         {
             Id = id;
+            User = user;
             Name = string.Empty;
             Description = string.Empty;
-            User = user;
         }
     }
 }

@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Perfect.Application\Perfect.Application.csproj" />
     <ProjectReference Include="..\Perfect.Domain\Perfect.Domain.csproj" />
+    <ProjectReference Include="..\Perfect.Infrastructure.Persistence\Perfect.Infrastructure.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

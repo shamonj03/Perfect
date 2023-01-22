@@ -6,10 +6,10 @@ namespace Perfect.Infrastructure.Factories
 {
     public class UserFactory : IUserFactory
     {
-        public Result<User> Create(int id)
+        public Result<User> Create(Guid id)
         {
-            if (id <= 0)
-                return Result.Failure<User>("Id must be a positive number.");
+            if (id == Guid.Empty)
+                return Result.Failure<User>("Id must not be empty.");
 
             return new User(id, "Test");
         }

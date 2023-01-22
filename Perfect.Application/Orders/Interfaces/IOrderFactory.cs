@@ -5,6 +5,6 @@ namespace Perfect.Application.Orders.Interfaces
 {
     public interface IOrderFactory
     {
-        Result<Order> Create(int id);
+        Task<Result<Order>> Create(Guid id);
     }
 }

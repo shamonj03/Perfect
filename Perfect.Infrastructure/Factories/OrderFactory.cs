@@ -2,30 +2,37 @@
 using Perfect.Application.Orders.Interfaces;
 using Perfect.Application.Users.Interfaces;
 using Perfect.Domain.Models;
+using Perfect.Infrastructure.Persistence.Interfaces;
 
 namespace Perfect.Infrastructure.Factories
 {
     public class OrderFactory : IOrderFactory
     {
+        private readonly IOrderRepository _orderRepository;
         private readonly IUserFactory _userFactory;
 
-        public OrderFactory(IUserFactory userFactory)
+        public OrderFactory(IOrderRepository orderRepository, IUserFactory userFactory)
         {
+            _orderRepository = orderRepository;
             _userFactory = userFactory;
         }
 
-        public Result<Order> Create(int id)
+        public Task<Result<Order>> Create(Guid id)
         {
-            if(id <= 0)
-                return Result.Failure<Order>("Id must be a positive number.");
-
-            // TODO: Get user id from subclaim or something.
-            var currentUserId = 1;
+            var currentUserId = Guid.NewGuid();
             var user = _userFactory.Create(currentUserId);
 
-            // TODO: Query orders on user id and order id.
-            return user
-                .Map(user => new Order(id, user));
+            return _orderRepository
+                .GetOrder(id)
+                .ToResult("No order found")
+                .Check(_ => user)
+                .Map(x => new Order(x.Id, user.Value)
+                {
+                    Id = id,
+                    Description = x.Description,
+                    Name = x.Name,
+                    Price = x.Price
+                });
         }
     }
 }

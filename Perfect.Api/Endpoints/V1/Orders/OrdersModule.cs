@@ -13,7 +13,7 @@ namespace Perfect.Api.Endpoints.V1.Orders
                 .HasApiVersion(1.0);
 
             group
-                .MapGet("/{id:int}", GetOrderRoute.Execute)
+                .MapGet("/{id:guid}", GetOrderRoute.Execute)
                 .WithTags("Get Order")
                 .Produces<OrderModel>(StatusCodes.Status200OK)
                 .Produces<Envelope>(StatusCodes.Status400BadRequest);

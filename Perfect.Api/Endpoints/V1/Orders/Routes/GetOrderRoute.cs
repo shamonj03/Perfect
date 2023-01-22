@@ -17,7 +17,7 @@ namespace Perfect.Api.Endpoints.v1.Orders.Routes
         {
             await validator.ValidateAndThrowAsync(request);
 
-            return orderService
+            return await orderService
                 .GetOrder(new GetOrderQuery(request.Id))
                 .ToEnvelope(order => 
                     new OrderDto(order.Id, order.Name, order.Description, order.Price, order.User.Name));

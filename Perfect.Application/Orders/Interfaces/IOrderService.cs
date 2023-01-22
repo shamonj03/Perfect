@@ -6,6 +6,6 @@ namespace Perfect.Application.Orders.Interfaces
 {
     public interface IOrderService
     {
-        Result<OrderModel> GetOrder(GetOrderQuery query);
+        Task<Result<OrderModel>> GetOrder(GetOrderQuery query);
     }
 }

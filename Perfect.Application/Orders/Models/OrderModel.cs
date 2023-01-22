@@ -1,4 +1,4 @@
 ﻿namespace Perfect.Application.Orders.Models
 {
-    public record OrderModel(int Id, string Name, string Description, float Price, OrderUserModel User);
+    public record OrderModel(Guid Id, string Name, string Description, float Price, OrderUserModel User);
 }

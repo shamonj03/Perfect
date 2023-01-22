@@ -14,9 +14,9 @@ namespace Perfect.Application.Orders
             _orderFactory = orderFactory;
         }
 
-        public Result<OrderModel> GetOrder(GetOrderQuery query)
+        public async Task<Result<OrderModel>> GetOrder(GetOrderQuery query)
         {
-            var result = _orderFactory.Create(query.Id);
+            var result = await _orderFactory.Create(query.Id);
 
             return result
                 .MapTry(order => new OrderModel(order.Id, order.Name, order.Description, order.Price, new OrderUserModel(order.User.Name)));
