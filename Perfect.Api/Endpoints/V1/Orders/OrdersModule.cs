@@ -17,6 +17,7 @@ namespace Perfect.Api.Endpoints.V1.Orders
                 .WithTags("Get Order")
                 .Produces<OrderModel>(StatusCodes.Status200OK)
                 .Produces<Envelope>(StatusCodes.Status400BadRequest);
+
         }
     }
 }

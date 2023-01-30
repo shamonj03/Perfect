@@ -14,5 +14,7 @@ namespace Perfect.Infrastructure.Persistence.Entities
         public float Price { get; set; }
 
         public Guid UserId { get; set; }
+
+        public DateTime CreatedDate { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
+using CSharpFunctionalExtensions.ValueTasks;
 using Perfect.Application.Orders.Interfaces;
 using Perfect.Application.Users.Interfaces;
 using Perfect.Domain.Models;
@@ -17,13 +18,13 @@ namespace Perfect.Infrastructure.Factories
             _userFactory = userFactory;
         }
 
-        public Task<Result<Order>> Create(Guid id)
+        public async Task<Result<Order>> InitializeAsync(Guid id, CancellationToken cancellationToken = default)
         {
             var currentUserId = Guid.NewGuid();
-            var user = _userFactory.Create(currentUserId);
+            var user = await _userFactory.CreateAsync(currentUserId, cancellationToken);
 
-            return _orderRepository
-                .GetOrder(id)
+            return await _orderRepository
+                .GetOrder(id, cancellationToken)
                 .ToResult("No order found")
                 .Check(_ => user)
                 .Map(x => new Order(x.Id, user.Value)
@@ -33,6 +34,14 @@ namespace Perfect.Infrastructure.Factories
                     Name = x.Name,
                     Price = x.Price
                 });
+        }
+
+        public async Task<Result<Order>> CreateAsync(CancellationToken cancellationToken = default)
+        {
+            var currentUserId = Guid.NewGuid();
+            var user = await _userFactory.CreateAsync(currentUserId, cancellationToken);
+
+            return user.Map(x => new Order(Guid.NewGuid(), x));
         }
     }
 }

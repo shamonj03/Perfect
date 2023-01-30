@@ -10,6 +10,8 @@
 
         public float Price { get; set; }
 
+        public DateTime CreatedDate { get; set; }
+
         public User User { get; set; }
 
         public Order(Guid id, User user)

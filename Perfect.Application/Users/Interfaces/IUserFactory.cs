@@ -5,6 +5,6 @@ namespace Perfect.Application.Users.Interfaces
 {
     public interface IUserFactory
     {
-        Result<User> Create(Guid id);
+        Task<Result<User>> CreateAsync(Guid id, CancellationToken cancellationToken = default);
     }
 }

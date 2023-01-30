@@ -1,7 +1,7 @@
 ﻿using CSharpFunctionalExtensions;
 using Perfect.Application.Orders.Interfaces;
 using Perfect.Application.Orders.Models;
-using Perfect.Application.Orders.Queries;
+using Perfect.Application.Orders.Requests;
 
 namespace Perfect.Application.Orders
 {
@@ -14,12 +14,23 @@ namespace Perfect.Application.Orders
             _orderFactory = orderFactory;
         }
 
-        public async Task<Result<OrderModel>> GetOrder(GetOrderQuery query)
+        public async Task<Result<OrderModel>> GetOrderAsync(GetOrderQuery query, CancellationToken cancellationToken = default)
         {
-            var result = await _orderFactory.Create(query.Id);
+            var result = await _orderFactory.InitializeAsync(query.Id, cancellationToken);
 
             return result
-                .MapTry(order => new OrderModel(order.Id, order.Name, order.Description, order.Price, new OrderUserModel(order.User.Name)));
+                .MapTry(order => new OrderModel(order.Id, order.Name, order.Description, order.Price, order.CreatedDate, new OrderUserModel(order.User.Name)));
+        }
+
+        public async Task<Result> CreateOrderAsync(CreateOrderCommand command, CancellationToken cancellationToken = default)
+        {
+            var result = await _orderFactory.CreateAsync(cancellationToken);
+
+            return result.Tap(x =>
+            {
+                x.Name = command.Name;
+                x.Description = command.Description;
+            });
         }
     }
 }
