@@ -33,6 +33,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perfect.AnalyzerService.App
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perfect.AnalyzerService.Infrastructure", "Perfect.AnalyzerService.Infrastructure\Perfect.AnalyzerService.Infrastructure.csproj", "{91F49119-B489-4CAC-AD3D-5CAB41EF6240}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{39C8F145-DE30-4A68-9B72-6CB2DF409E52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perfect.FileAnalyzer.Application.Tests", "Perfect.FileAnalyzer.Application.Tests\Perfect.FileAnalyzer.Application.Tests.csproj", "{23FB1352-026C-4DE2-BDDD-05B939112471}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +91,10 @@ Global
 		{91F49119-B489-4CAC-AD3D-5CAB41EF6240}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91F49119-B489-4CAC-AD3D-5CAB41EF6240}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91F49119-B489-4CAC-AD3D-5CAB41EF6240}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23FB1352-026C-4DE2-BDDD-05B939112471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23FB1352-026C-4DE2-BDDD-05B939112471}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23FB1352-026C-4DE2-BDDD-05B939112471}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23FB1352-026C-4DE2-BDDD-05B939112471}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -103,6 +111,8 @@ Global
 		{6193FBD1-15FA-4CAD-8FB4-89A14B1DD078} = {B07E3C84-7A1D-4F34-961B-4B234D818AAF}
 		{323BE41E-F1AB-4C39-87F1-0B0068352AF5} = {B07E3C84-7A1D-4F34-961B-4B234D818AAF}
 		{91F49119-B489-4CAC-AD3D-5CAB41EF6240} = {B07E3C84-7A1D-4F34-961B-4B234D818AAF}
+		{39C8F145-DE30-4A68-9B72-6CB2DF409E52} = {B07E3C84-7A1D-4F34-961B-4B234D818AAF}
+		{23FB1352-026C-4DE2-BDDD-05B939112471} = {39C8F145-DE30-4A68-9B72-6CB2DF409E52}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {12D2A8F0-EA77-4CB7-80A2-FE5F6D574DDC}

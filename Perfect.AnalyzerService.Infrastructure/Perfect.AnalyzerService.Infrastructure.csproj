@@ -7,7 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Consumers" />
+      <PackageReference Include="MassTransit" Version="8.0.12" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Perfect.Messages\Perfect.Messages.csproj" />
     </ItemGroup>
 
 </Project>
