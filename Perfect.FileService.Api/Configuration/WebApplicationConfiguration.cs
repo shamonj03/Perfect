@@ -1,7 +1,7 @@
-﻿using Perfect.Api.Common.Extensions;
-using Perfect.Api.Middleware;
+﻿using Perfect.FileService.Api.Common.Extensions;
+using Perfect.FileService.Api.Common.Middleware;
 
-namespace Perfect.Api
+namespace Perfect.FileService.Api.Configuration
 {
     public static class WebApplicationConfiguration
     {

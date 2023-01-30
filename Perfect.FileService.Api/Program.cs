@@ -1,5 +1,4 @@
-using Perfect.Api;
-using Perfect.Api.Configuration;
+using Perfect.FileService.Api.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 

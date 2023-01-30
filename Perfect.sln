@@ -13,6 +13,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Perfect.Infrastructure", "P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Perfect.Infrastructure.Persistence", "Perfect.Infrastructure.Persistence\Perfect.Infrastructure.Persistence.csproj", "{E064C48B-7F5E-450F-9D00-708823E93279}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FileService", "FileService", "{13B73B5F-8EAA-43B6-B853-08C779C1CA14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perfect.FileService.Api", "Perfect.FileService.Api\Perfect.FileService.Api.csproj", "{907A2A25-6D86-4249-930F-81DA135ACD48}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Perfect.Public.Api", "Perfect.Public.Api", "{225AB074-3057-4BCA-B49B-D7A31587CC7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perfect.Messages", "Perfect.Messages\Perfect.Messages.csproj", "{BEB47300-A0FC-46DE-A837-7AFD8F9C2BCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perfect.FileService.Infrastructure", "Perfect.FileService.Infrastructure\Perfect.FileService.Infrastructure.csproj", "{2398FE0C-799C-4B43-A8E4-DB57AB487FD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perfect.FileService.Application", "Perfect.FileService.Application\Perfect.FileService.Application.csproj", "{ADC1579B-DEFF-40B1-9F20-C882AC866FB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,13 +51,35 @@ Global
 		{E064C48B-7F5E-450F-9D00-708823E93279}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E064C48B-7F5E-450F-9D00-708823E93279}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E064C48B-7F5E-450F-9D00-708823E93279}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D56B9840-6FA5-42A8-99F2-69C36DEE3EE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D56B9840-6FA5-42A8-99F2-69C36DEE3EE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D56B9840-6FA5-42A8-99F2-69C36DEE3EE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D56B9840-6FA5-42A8-99F2-69C36DEE3EE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{907A2A25-6D86-4249-930F-81DA135ACD48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{907A2A25-6D86-4249-930F-81DA135ACD48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{907A2A25-6D86-4249-930F-81DA135ACD48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{907A2A25-6D86-4249-930F-81DA135ACD48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEB47300-A0FC-46DE-A837-7AFD8F9C2BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEB47300-A0FC-46DE-A837-7AFD8F9C2BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEB47300-A0FC-46DE-A837-7AFD8F9C2BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEB47300-A0FC-46DE-A837-7AFD8F9C2BCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2398FE0C-799C-4B43-A8E4-DB57AB487FD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2398FE0C-799C-4B43-A8E4-DB57AB487FD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2398FE0C-799C-4B43-A8E4-DB57AB487FD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2398FE0C-799C-4B43-A8E4-DB57AB487FD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADC1579B-DEFF-40B1-9F20-C882AC866FB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADC1579B-DEFF-40B1-9F20-C882AC866FB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADC1579B-DEFF-40B1-9F20-C882AC866FB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADC1579B-DEFF-40B1-9F20-C882AC866FB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{78264EC7-9365-49FC-8AC7-6F0F5D651A2A} = {225AB074-3057-4BCA-B49B-D7A31587CC7D}
+		{6BCD712B-CE42-4F4B-A080-B61711D6EAAF} = {225AB074-3057-4BCA-B49B-D7A31587CC7D}
+		{D079CFC3-DE45-4D31-AB9E-BA54F3F0DE86} = {225AB074-3057-4BCA-B49B-D7A31587CC7D}
+		{8B5E5AC9-1F9E-48E4-AFBD-4F7C3ED6742D} = {225AB074-3057-4BCA-B49B-D7A31587CC7D}
+		{E064C48B-7F5E-450F-9D00-708823E93279} = {225AB074-3057-4BCA-B49B-D7A31587CC7D}
+		{907A2A25-6D86-4249-930F-81DA135ACD48} = {13B73B5F-8EAA-43B6-B853-08C779C1CA14}
+		{2398FE0C-799C-4B43-A8E4-DB57AB487FD8} = {13B73B5F-8EAA-43B6-B853-08C779C1CA14}
+		{ADC1579B-DEFF-40B1-9F20-C882AC866FB9} = {13B73B5F-8EAA-43B6-B853-08C779C1CA14}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {12D2A8F0-EA77-4CB7-80A2-FE5F6D574DDC}

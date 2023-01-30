@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using Perfect.Api.Common.Models;
+using Perfect.FileService.Api.Common.Models;
 
-namespace Perfect.Api.Middleware
+namespace Perfect.FileService.Api.Common.Middleware
 {
     public class InternalErrorMiddleware
     {
@@ -18,11 +18,11 @@ namespace Perfect.Api.Middleware
             {
                 await _next(httpContext);
             }
-            catch(ValidationException ex)
+            catch (ValidationException ex)
             {
                 var error = ex.Errors.First();
                 var envelope = new Envelope(error.ErrorMessage);
-                httpContext.Response.StatusCode = int.Parse(error.ErrorCode);
+                httpContext.Response.StatusCode = int.TryParse(error.ErrorCode, out var code) ? code : StatusCodes.Status400BadRequest;
                 await httpContext.Response.WriteAsJsonAsync(envelope);
             }
             catch (Exception ex)
