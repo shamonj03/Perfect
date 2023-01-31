@@ -12,7 +12,7 @@ public class TestFileAnalyzer
 
         var validator = new FileAnalyzerService();
 
-        var actual = validator.CountOddLetters(input);
+        var actual = validator.CountOddLettersFromString(input);
         
         Assert.Equal(expected, actual);
     }
