@@ -1,7 +1,9 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.Options;
+using Perfect.FileService.Application.Common;
 using Perfect.FileService.Application.Files;
 using Perfect.FileService.Application.Files.Interfaces;
+using Perfect.FileService.Infrastructure.Common;
 using Perfect.FileService.Infrastructure.Files;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -36,8 +38,11 @@ namespace Perfect.FileService.Api.Configuration
 
             services.AddValidatorsFromAssemblyContaining<Program>();
 
+            services.RegisterMassTransit();
+
             // Infrastructure
             services.AddScoped<IFileRepository, BlobFileRepository>();
+            services.AddScoped<IMessageSender, MessageSender>();
 
             // Application
             services.AddScoped<IFileUploadService, FileUploadService>();
