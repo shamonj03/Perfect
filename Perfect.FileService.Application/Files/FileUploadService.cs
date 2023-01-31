@@ -1,23 +1,25 @@
-﻿using Perfect.FileService.Application.Files.Interfaces;
+﻿using Perfect.FileService.Application.Common;
+using Perfect.FileService.Application.Files.Interfaces;
 using Perfect.FileService.Application.Files.Requests;
+using Perfect.Messages.Events;
 
 namespace Perfect.FileService.Application.Files
 {
     public class FileUploadService : IFileUploadService
     {
         private readonly IFileRepository _fileRepository;
+        private readonly IMessageSender _messageSender;
 
-        public FileUploadService(IFileRepository fileRepository)
+        public FileUploadService(IFileRepository fileRepository, IMessageSender messageSender)
         {
             _fileRepository = fileRepository;
+            _messageSender = messageSender;
         }
 
-        public Task UploadAsync(UploadFileCommand command, CancellationToken cancellationToken)
+        public async Task UploadAsync(UploadFileCommand command, CancellationToken cancellationToken)
         {
-            var result = _fileRepository.AddFileAsync(command.Name, command.Length, command.Content, cancellationToken);
-            
-            // TODO: Emit event
-            return result;
+            await _fileRepository.AddFileAsync(command.Name, command.Length, command.Content, cancellationToken);
+            await _messageSender.PublishEventAsync(new FileReceivedEvent(command.Name), cancellationToken);
         }
     }
 }
