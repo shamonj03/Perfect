@@ -18,14 +18,7 @@ services:
     command: 'azurite-blob --blobHost 0.0.0.0 --blobPort 10000'
     networks:
         - azureite_go_net
-
-  perfect.fileservice.api:
-    image: ${DOCKER_REGISTRY-}perfectfileserviceapi
-    container_name: 'perfect.fileservice.api'
-    build:
-      context: .
-      dockerfile: Perfect.FileService.Api/Dockerfile
-
+        
   perfect.sagaservice.host:
     image: ${DOCKER_REGISTRY-}perfectsagaservicehost
     container_name: 'perfect.sagaservice.host'
@@ -33,6 +26,19 @@ services:
       context: .
       dockerfile: Perfect.SagaService.Host/Dockerfile
 
+  perfect.fileservice.api:
+    image: ${DOCKER_REGISTRY-}perfectfileserviceapi
+    container_name: 'perfect.fileservice.api'
+    build:
+      context: .
+      dockerfile: Perfect.FileService.Api/Dockerfile
+      
+  perfect.analyzerservice.api:
+    image: ${DOCKER_REGISTRY-}perfectanalyzerserviceapi
+    build:
+      context: .
+      dockerfile: Perfect.AnalyzerService.Api/Dockerfile
+      
 networks:
   rabbitmq_go_net:
     driver: bridge

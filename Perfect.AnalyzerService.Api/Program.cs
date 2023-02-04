@@ -1,20 +1,8 @@
-using MassTransit;
-using Perfect.AnalyzerService.Infrastructure.Consumers;
+using Perfect.AnalyzerService.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddMassTransit(x =>
-{
-    x.AddConsumer<AnalyzeFileConsumer>();
-
-    x.UsingInMemory((context, cfg) =>
-    {
-        cfg.ConfigureEndpoints(context);
-    });
-});
-
-var app = builder.Build();
-
-app.MapGet("/", () => "Hello World!");
-
-app.Run();
+builder.Services.RegisterServices(builder.Configuration);
+builder.Build()
+    .RegisterApplication()
+    .Run();
