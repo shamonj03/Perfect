@@ -1,0 +1,40 @@
+version: '3.4'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: 'some-rabbit'
+    ports:
+      - 15672:15672
+      - 5672:5672
+    networks:
+        - rabbitmq_go_net
+
+  azureite:
+    image: mcr.microsoft.com/azure-storage/azurite
+    container_name: 'some-azurite'
+    ports:
+     - 10000:10000
+    command: 'azurite-blob --blobHost 0.0.0.0 --blobPort 10000'
+    networks:
+        - azureite_go_net
+
+  perfect.fileservice.api:
+    image: ${DOCKER_REGISTRY-}perfectfileserviceapi
+    container_name: 'perfect.fileservice.api'
+    build:
+      context: .
+      dockerfile: Perfect.FileService.Api/Dockerfile
+
+  perfect.sagaservice.host:
+    image: ${DOCKER_REGISTRY-}perfectsagaservicehost
+    container_name: 'perfect.sagaservice.host'
+    build:
+      context: .
+      dockerfile: Perfect.SagaService.Host/Dockerfile
+
+networks:
+  rabbitmq_go_net:
+    driver: bridge
+  azureite_go_net:
+    driver: bridge

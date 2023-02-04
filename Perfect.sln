@@ -3,27 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Perfect.Api", "Perfect.Api\Perfect.Api.csproj", "{78264EC7-9365-49FC-8AC7-6F0F5D651A2A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Perfect.Application", "Perfect.Application\Perfect.Application.csproj", "{6BCD712B-CE42-4F4B-A080-B61711D6EAAF}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Perfect.Domain", "Perfect.Domain\Perfect.Domain.csproj", "{D079CFC3-DE45-4D31-AB9E-BA54F3F0DE86}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Perfect.Infrastructure", "Perfect.Infrastructure\Perfect.Infrastructure.csproj", "{8B5E5AC9-1F9E-48E4-AFBD-4F7C3ED6742D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Perfect.Infrastructure.Persistence", "Perfect.Infrastructure.Persistence\Perfect.Infrastructure.Persistence.csproj", "{E064C48B-7F5E-450F-9D00-708823E93279}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FileService", "FileService", "{13B73B5F-8EAA-43B6-B853-08C779C1CA14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perfect.FileService.Api", "Perfect.FileService.Api\Perfect.FileService.Api.csproj", "{907A2A25-6D86-4249-930F-81DA135ACD48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Perfect.FileService.Api", "Perfect.FileService.Api\Perfect.FileService.Api.csproj", "{907A2A25-6D86-4249-930F-81DA135ACD48}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Perfect.Public.Api", "Perfect.Public.Api", "{225AB074-3057-4BCA-B49B-D7A31587CC7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Perfect.Messages", "Perfect.Messages\Perfect.Messages.csproj", "{BEB47300-A0FC-46DE-A837-7AFD8F9C2BCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perfect.Messages", "Perfect.Messages\Perfect.Messages.csproj", "{BEB47300-A0FC-46DE-A837-7AFD8F9C2BCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Perfect.FileService.Infrastructure", "Perfect.FileService.Infrastructure\Perfect.FileService.Infrastructure.csproj", "{2398FE0C-799C-4B43-A8E4-DB57AB487FD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perfect.FileService.Infrastructure", "Perfect.FileService.Infrastructure\Perfect.FileService.Infrastructure.csproj", "{2398FE0C-799C-4B43-A8E4-DB57AB487FD8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perfect.FileService.Application", "Perfect.FileService.Application\Perfect.FileService.Application.csproj", "{ADC1579B-DEFF-40B1-9F20-C882AC866FB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Perfect.FileService.Application", "Perfect.FileService.Application\Perfect.FileService.Application.csproj", "{ADC1579B-DEFF-40B1-9F20-C882AC866FB9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AnalyzerService", "AnalyzerService", "{B07E3C84-7A1D-4F34-961B-4B234D818AAF}"
 EndProject
@@ -38,7 +26,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perfect.FileAnalyzer.Application.Tests", "Perfect.FileAnalyzer.Application.Tests\Perfect.FileAnalyzer.Application.Tests.csproj", "{23FB1352-026C-4DE2-BDDD-05B939112471}"
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SagaService", "SagaService", "{DF42CB26-C723-4E6D-BAB0-7F764DDB128B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perfect.SagaService.Host", "Perfect.SagaService.Host\Perfect.SagaService.Host.csproj", "{9C6899DD-C669-4E5F-96FC-C7D94F4E2B67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Perfect.SagaService.Host", "Perfect.SagaService.Host\Perfect.SagaService.Host.csproj", "{9C6899DD-C669-4E5F-96FC-C7D94F4E2B67}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{FBC75FC4-81C3-46C5-9089-C4A12B936A04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,26 +36,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{78264EC7-9365-49FC-8AC7-6F0F5D651A2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78264EC7-9365-49FC-8AC7-6F0F5D651A2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78264EC7-9365-49FC-8AC7-6F0F5D651A2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78264EC7-9365-49FC-8AC7-6F0F5D651A2A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6BCD712B-CE42-4F4B-A080-B61711D6EAAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6BCD712B-CE42-4F4B-A080-B61711D6EAAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6BCD712B-CE42-4F4B-A080-B61711D6EAAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6BCD712B-CE42-4F4B-A080-B61711D6EAAF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D079CFC3-DE45-4D31-AB9E-BA54F3F0DE86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D079CFC3-DE45-4D31-AB9E-BA54F3F0DE86}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D079CFC3-DE45-4D31-AB9E-BA54F3F0DE86}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D079CFC3-DE45-4D31-AB9E-BA54F3F0DE86}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8B5E5AC9-1F9E-48E4-AFBD-4F7C3ED6742D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8B5E5AC9-1F9E-48E4-AFBD-4F7C3ED6742D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8B5E5AC9-1F9E-48E4-AFBD-4F7C3ED6742D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8B5E5AC9-1F9E-48E4-AFBD-4F7C3ED6742D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E064C48B-7F5E-450F-9D00-708823E93279}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E064C48B-7F5E-450F-9D00-708823E93279}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E064C48B-7F5E-450F-9D00-708823E93279}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E064C48B-7F5E-450F-9D00-708823E93279}.Release|Any CPU.Build.0 = Release|Any CPU
 		{907A2A25-6D86-4249-930F-81DA135ACD48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{907A2A25-6D86-4249-930F-81DA135ACD48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{907A2A25-6D86-4249-930F-81DA135ACD48}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -102,16 +72,15 @@ Global
 		{9C6899DD-C669-4E5F-96FC-C7D94F4E2B67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C6899DD-C669-4E5F-96FC-C7D94F4E2B67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C6899DD-C669-4E5F-96FC-C7D94F4E2B67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBC75FC4-81C3-46C5-9089-C4A12B936A04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBC75FC4-81C3-46C5-9089-C4A12B936A04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBC75FC4-81C3-46C5-9089-C4A12B936A04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBC75FC4-81C3-46C5-9089-C4A12B936A04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{78264EC7-9365-49FC-8AC7-6F0F5D651A2A} = {225AB074-3057-4BCA-B49B-D7A31587CC7D}
-		{6BCD712B-CE42-4F4B-A080-B61711D6EAAF} = {225AB074-3057-4BCA-B49B-D7A31587CC7D}
-		{D079CFC3-DE45-4D31-AB9E-BA54F3F0DE86} = {225AB074-3057-4BCA-B49B-D7A31587CC7D}
-		{8B5E5AC9-1F9E-48E4-AFBD-4F7C3ED6742D} = {225AB074-3057-4BCA-B49B-D7A31587CC7D}
-		{E064C48B-7F5E-450F-9D00-708823E93279} = {225AB074-3057-4BCA-B49B-D7A31587CC7D}
 		{907A2A25-6D86-4249-930F-81DA135ACD48} = {13B73B5F-8EAA-43B6-B853-08C779C1CA14}
 		{2398FE0C-799C-4B43-A8E4-DB57AB487FD8} = {13B73B5F-8EAA-43B6-B853-08C779C1CA14}
 		{ADC1579B-DEFF-40B1-9F20-C882AC866FB9} = {13B73B5F-8EAA-43B6-B853-08C779C1CA14}
@@ -120,6 +89,7 @@ Global
 		{91F49119-B489-4CAC-AD3D-5CAB41EF6240} = {B07E3C84-7A1D-4F34-961B-4B234D818AAF}
 		{39C8F145-DE30-4A68-9B72-6CB2DF409E52} = {B07E3C84-7A1D-4F34-961B-4B234D818AAF}
 		{23FB1352-026C-4DE2-BDDD-05B939112471} = {39C8F145-DE30-4A68-9B72-6CB2DF409E52}
+		{9C6899DD-C669-4E5F-96FC-C7D94F4E2B67} = {DF42CB26-C723-4E6D-BAB0-7F764DDB128B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {12D2A8F0-EA77-4CB7-80A2-FE5F6D574DDC}

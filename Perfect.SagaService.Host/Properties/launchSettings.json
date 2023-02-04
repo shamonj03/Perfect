@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Perfect.SagaService.Host": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
