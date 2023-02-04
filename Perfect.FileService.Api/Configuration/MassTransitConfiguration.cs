@@ -1,4 +1,6 @@
 ﻿using MassTransit;
+using Microsoft.Extensions.Options;
+using Perfect.FileService.Api.Configuration.Models;
 
 namespace Perfect.FileService.Api.Configuration
 {
@@ -8,15 +10,16 @@ namespace Perfect.FileService.Api.Configuration
         {
             services.AddMassTransit(x =>
             {
-                x.UsingRabbitMq((context, cfg) => 
-                {
-                    cfg.Host("localhost", "/", h => 
-                    {
-                        h.Username("guest");
-                        h.Password("guest");
-                    });
+                //x.UsingAzureServiceBus((context, cfg) =>
+                //{
+                //    var settings = context.GetRequiredService<IOptions<AzureServiceBusSettings>>();
+                //    cfg.Host(settings.Value.ConnectionString);
+                //});
 
-                    cfg.ConfigureEndpoints(context);
+                x.UsingRabbitMq((context, cfg) =>
+                {
+                    var settings = context.GetRequiredService<IOptions<RabbitMqSettings>>();
+                    cfg.Host(settings.Value.ConnectionString);
                 });
             });
         }

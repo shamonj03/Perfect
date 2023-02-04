@@ -1,5 +1,7 @@
-﻿using FluentValidation;
+﻿using Azure.Storage.Blobs;
+using FluentValidation;
 using Microsoft.Extensions.Options;
+using Perfect.FileService.Api.Configuration.Models;
 using Perfect.FileService.Application.Common;
 using Perfect.FileService.Application.Files;
 using Perfect.FileService.Application.Files.Interfaces;
@@ -13,6 +15,11 @@ namespace Perfect.FileService.Api.Configuration
     {
         public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
+            // Application Settings
+            services.Configure<BlobStorageSettings>(configuration.GetSection(BlobStorageSettings.Section));
+            services.Configure<AzureServiceBusSettings>(configuration.GetSection(AzureServiceBusSettings.Section));
+            services.Configure<RabbitMqSettings>(configuration.GetSection(RabbitMqSettings.Section));
+
             //services.AddProblemDetails();
 
             services.AddEndpointsApiExplorer();
@@ -36,16 +43,20 @@ namespace Perfect.FileService.Api.Configuration
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
             services.AddSwaggerGen(options => options.OperationFilter<SwaggerDefaultValues>());
 
+            // Application
             services.AddValidatorsFromAssemblyContaining<Program>();
-
-            services.RegisterMassTransit();
+            services.AddScoped<IFileUploadService, FileUploadService>();
 
             // Infrastructure
+            services.RegisterMassTransit();
             services.AddScoped<IFileRepository, BlobFileRepository>();
             services.AddScoped<IMessageSender, MessageSender>();
 
-            // Application
-            services.AddScoped<IFileUploadService, FileUploadService>();
+            services.AddSingleton(x =>
+            {
+                var settings = x.GetRequiredService<IOptions<BlobStorageSettings>>();
+                return new BlobServiceClient(settings.Value.ConnectionString);
+            });
         }
     }
 }

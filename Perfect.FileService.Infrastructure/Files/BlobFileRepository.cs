@@ -5,19 +5,25 @@ namespace Perfect.FileService.Infrastructure.Files
 {
     public class BlobFileRepository : IFileRepository
     {
+        private readonly BlobServiceClient _blobServiceClient;
+
+        public BlobFileRepository(BlobServiceClient blobServiceClient)
+        {
+            _blobServiceClient = blobServiceClient;
+        }
+
         public async Task AddFileAsync(string fileName, long length, Stream content, CancellationToken cancellationToken)
         {
             try
             {
                 // TODO: Get connection string from app settings
-                var client = new BlobContainerClient(
-                    "AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;DefaultEndpointsProtocol=http;BlobEndpoint=http://host.docker.internal:10000/devstoreaccount1;", "files-container"
-                );
-                await client.CreateIfNotExistsAsync(cancellationToken: cancellationToken);
+                var containerClient = _blobServiceClient.GetBlobContainerClient("files-container");
+                await containerClient.CreateIfNotExistsAsync(cancellationToken: cancellationToken);
 
                 using (content)
                 {
-                    var response = await client.UploadBlobAsync(fileName, content, cancellationToken);
+                    var blob = containerClient.GetBlobClient(fileName);
+                    await blob.UploadAsync(content, overwrite: true, cancellationToken: cancellationToken);
                 }
             } 
             catch(Exception ex)
