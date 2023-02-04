@@ -1,7 +1,7 @@
 ﻿using Perfect.FileService.Api.Common.Extensions;
 using Perfect.FileService.Api.Common.Middleware;
 
-namespace Perfect.FileService.Api.Configuration
+namespace Perfect.FileService.Api
 {
     public static class WebApplicationConfiguration
     {
@@ -19,19 +19,18 @@ namespace Perfect.FileService.Api.Configuration
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI(
-                    options =>
-                    {
-                        var descriptions = app.DescribeApiVersions();
+                app.UseSwaggerUI(options =>
+                {
+                    var descriptions = app.DescribeApiVersions();
 
-                        // build a swagger endpoint for each discovered API version
-                        foreach (var description in descriptions)
-                        {
-                            var url = $"/swagger/{description.GroupName}/swagger.json";
-                            var name = description.GroupName.ToUpperInvariant();
-                            options.SwaggerEndpoint(url, name);
-                        }
-                    });
+                    // build a swagger endpoint for each discovered API version
+                    foreach (var description in descriptions)
+                    {
+                        var url = $"/swagger/{description.GroupName}/swagger.json";
+                        var name = description.GroupName.ToUpperInvariant();
+                        options.SwaggerEndpoint(url, name);
+                    }
+                });
             }
             return app;
         }
