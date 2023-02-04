@@ -2,7 +2,7 @@
 using MassTransit;
 using Microsoft.Extensions.Options;
 using Perfect.FileService.Api.Configuration.Models;
-using Perfect.FileService.Api.Consumers.FileUpload;
+using Perfect.FileService.Api.Consumers;
 
 namespace Perfect.FileService.Api.Configuration
 {

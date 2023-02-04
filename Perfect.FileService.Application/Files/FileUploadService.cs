@@ -18,8 +18,11 @@ namespace Perfect.FileService.Application.Files
 
         public async Task UploadAsync(UploadFileCommand command, CancellationToken cancellationToken)
         {
-            await _fileRepository.AddFileAsync(command.Name, command.Length, command.Content, cancellationToken);
-            await _messageSender.PublishEventAsync(new FileReceivedEvent(command.Name), cancellationToken);
+            await _fileRepository.AddFileAsync(command.FileName, command.Length, command.Content, cancellationToken);
+            await _messageSender.PublishEventAsync(new FileReceivedEvent
+            {
+                FileName = command.FileName,
+            }, cancellationToken);
         }
     }
 }

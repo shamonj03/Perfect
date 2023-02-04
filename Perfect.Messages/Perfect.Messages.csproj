@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\" />
+    <PackageReference Include="MassTransit.Azure.Storage" Version="8.0.12" />
   </ItemGroup>
 
 </Project>

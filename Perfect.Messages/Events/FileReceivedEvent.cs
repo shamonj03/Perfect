@@ -1,4 +1,7 @@
 ﻿namespace Perfect.Messages.Events
 {
-    public record FileReceivedEvent(string Name);
+    public record FileReceivedEvent
+    {
+        public string FileName { get; init; } = string.Empty;
+    }
 }
