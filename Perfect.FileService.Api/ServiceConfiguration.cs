@@ -8,7 +8,6 @@ using Perfect.FileService.Application.Files;
 using Perfect.FileService.Application.Files.Interfaces;
 using Perfect.FileService.Infrastructure.Common;
 using Perfect.FileService.Infrastructure.Files;
-using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Perfect.FileService.Api
 {
@@ -20,10 +19,6 @@ namespace Perfect.FileService.Api
             services.Configure<BlobStorageSettings>(configuration.GetSection(BlobStorageSettings.Section));
             services.Configure<AzureServiceBusSettings>(configuration.GetSection(AzureServiceBusSettings.Section));
             services.Configure<RabbitMqSettings>(configuration.GetSection(RabbitMqSettings.Section));
-
-            // Other
-            services.RegisterSwagger();
-            services.RegisterMassTransit();
 
             // Application
             services.AddValidatorsFromAssemblyContaining<Program>();
@@ -38,6 +33,10 @@ namespace Perfect.FileService.Api
                 var settings = x.GetRequiredService<IOptions<BlobStorageSettings>>();
                 return new BlobServiceClient(settings.Value.ConnectionString);
             });
+
+            // Other
+            services.RegisterSwagger();
+            services.RegisterMassTransit();
         }
     }
 }

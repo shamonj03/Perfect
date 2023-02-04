@@ -1,5 +1,4 @@
 ﻿using MassTransit;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
@@ -37,7 +36,7 @@ await Host.CreateDefaultBuilder(args)
 
                 cfg.ReceiveEndpoint("saga-file-recieved-event", x =>
                 {
-                    x.Consumer<FileReceivedConsumer>();
+                    x.ConfigureConsumer<FileReceivedConsumer>(context);
                 });
             });
         });

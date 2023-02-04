@@ -1,6 +1,8 @@
-﻿using MassTransit;
+﻿using Azure.Storage.Blobs;
+using MassTransit;
 using Microsoft.Extensions.Options;
 using Perfect.FileService.Api.Configuration.Models;
+using Perfect.FileService.Api.Consumers.FileUpload;
 
 namespace Perfect.FileService.Api.Configuration
 {
@@ -8,8 +10,16 @@ namespace Perfect.FileService.Api.Configuration
     {
         public static void RegisterMassTransit(this IServiceCollection services)
         {
+            services.AddSingleton<IMessageDataRepository>(x =>
+            {
+                var client = x.GetRequiredService<BlobServiceClient>();
+                return client.CreateMessageDataRepository("message-data");
+            });
+
             services.AddMassTransit(x =>
             {
+                x.AddConsumer<FileUploadConsumer>();
+
                 //x.UsingAzureServiceBus((context, cfg) =>
                 //{
                 //    var settings = context.GetRequiredService<IOptions<AzureServiceBusSettings>>();
@@ -19,7 +29,15 @@ namespace Perfect.FileService.Api.Configuration
                 x.UsingRabbitMq((context, cfg) =>
                 {
                     var settings = context.GetRequiredService<IOptions<RabbitMqSettings>>();
+                    var messageRepository = context.GetRequiredService<IMessageDataRepository>();
+
                     cfg.Host(settings.Value.ConnectionString);
+                    cfg.UseMessageData(messageRepository);
+
+                    cfg.ReceiveEndpoint("file-service-upload-command", y =>
+                    {
+                        y.ConfigureConsumer<FileUploadConsumer>(context);
+                    });
                 });
             });
         }
