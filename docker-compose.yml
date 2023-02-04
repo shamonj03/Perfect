@@ -35,6 +35,7 @@ services:
       
   perfect.analyzerservice.api:
     image: ${DOCKER_REGISTRY-}perfectanalyzerserviceapi
+    container_name: 'perfect.analyzerservice.api'
     build:
       context: .
       dockerfile: Perfect.AnalyzerService.Api/Dockerfile
