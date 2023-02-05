@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Perfect.AnalyzerService.Api\Perfect.AnalyzerService.Api.csproj" />
+    <ProjectReference Include="..\Perfect.FileService.Api\Perfect.FileService.Api.csproj" />
+    <ProjectReference Include="..\Perfect.Messages\Perfect.Messages.csproj" />
+    <ProjectReference Include="..\Perfect.SagaService.Host\Perfect.SagaService.Host.csproj" />
+  </ItemGroup>
+
+</Project>

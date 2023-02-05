@@ -12,8 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Perfect.FileService.Domain\Perfect.FileService.Domain.csproj" />
+    <ProjectReference Include="..\Perfect.FileService.Domain\Perfect.FileService.Domain.csproj" />
     <ProjectReference Include="..\Perfect.FileService.Application\Perfect.FileService.Application.csproj" />
+    <ProjectReference Include="..\Perfect.FileService.Domain\Perfect.FileService.Domain.csproj" />
   </ItemGroup>
 
 </Project>
