@@ -12,7 +12,7 @@ namespace Perfect.SagaService.Host.StateMachine
 
             Event(() => FileReceived, x =>
                 x.CorrelateBy(y => y.FileName, y => y.Message.FileName)
-                 .SelectId(_ => NewId.NextGuid())
+                 .SelectId(x => x.CorrelationId ?? NewId.NextGuid())
             );
 
             Initially(
