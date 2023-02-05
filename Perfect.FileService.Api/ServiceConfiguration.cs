@@ -6,6 +6,7 @@ using Perfect.FileService.Api.Configuration.Models;
 using Perfect.FileService.Application.Common;
 using Perfect.FileService.Application.Files;
 using Perfect.FileService.Application.Files.Interfaces;
+using Perfect.FileService.Domain.Services;
 using Perfect.FileService.Infrastructure.Common;
 using Perfect.FileService.Infrastructure.Files;
 
@@ -22,7 +23,7 @@ namespace Perfect.FileService.Api
 
             // Application
             services.AddValidatorsFromAssemblyContaining<Program>();
-            services.AddScoped<IFileUploadService, FileUploadService>();
+            services.AddScoped<IFileService, ConcreteFileService>();
 
             // Infrastructure
             services.AddScoped<IFileRepository, BlobFileRepository>();

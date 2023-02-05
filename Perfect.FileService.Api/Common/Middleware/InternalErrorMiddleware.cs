@@ -25,7 +25,7 @@ namespace Perfect.FileService.Api.Common.Middleware
                 httpContext.Response.StatusCode = int.TryParse(error.ErrorCode, out var code) ? code : StatusCodes.Status400BadRequest;
                 await httpContext.Response.WriteAsJsonAsync(envelope);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 var errorId = Guid.NewGuid();
                 var envelope = new Envelope($"{errorId} - An unexpected error has occured.");

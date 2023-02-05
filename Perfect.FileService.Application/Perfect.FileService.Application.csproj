@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Perfect.FileService.Domain\Perfect.FileService.Domain.csproj" />
     <ProjectReference Include="..\Perfect.Messages\Perfect.Messages.csproj" />
   </ItemGroup>
 

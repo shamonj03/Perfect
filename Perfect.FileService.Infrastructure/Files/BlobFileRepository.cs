@@ -1,5 +1,6 @@
 ﻿using Azure.Storage.Blobs;
-using Perfect.FileService.Application.Files.Interfaces;
+using Perfect.FileService.Domain.Models;
+using Perfect.FileService.Domain.Services;
 
 namespace Perfect.FileService.Infrastructure.Files
 {
@@ -12,24 +13,41 @@ namespace Perfect.FileService.Infrastructure.Files
             _blobServiceClient = blobServiceClient;
         }
 
-        public async Task AddFileAsync(string fileName, long length, Stream content, CancellationToken cancellationToken)
+        public async Task<FileEntity> GetFileAsync(string fileName, CancellationToken cancellationToken)
         {
-            try
-            {
-                // TODO: Get connection string from app settings
-                var containerClient = _blobServiceClient.GetBlobContainerClient("files-container");
-                await containerClient.CreateIfNotExistsAsync(cancellationToken: cancellationToken);
+            var containerClient = await GetBlobContainerClient(cancellationToken);
 
-                using (content)
-                {
-                    var blob = containerClient.GetBlobClient(fileName);
-                    await blob.UploadAsync(content, overwrite: true, cancellationToken: cancellationToken);
-                }
-            } 
-            catch(Exception ex)
+            var blob = containerClient.GetBlobClient(fileName);
+
+            var exists = await blob.ExistsAsync(cancellationToken);
+
+            if(!exists.Value)
+                throw new FileNotFoundException(fileName);
+
+            using (var memoryStream = new MemoryStream())
             {
-                throw ex;
+                await blob.DownloadToAsync(memoryStream, cancellationToken);
+                return new FileEntity(fileName, memoryStream.Length, memoryStream.ToArray());
             }
+        }
+
+        public async Task SaveFileAsync(FileEntity model, CancellationToken cancellationToken)
+        {
+            // TODO: Get connection string from app settings
+            var containerClient = await GetBlobContainerClient(cancellationToken);
+
+            var blob = containerClient.GetBlobClient(model.FileName);
+
+            using (var memoryStream = new MemoryStream(model.Content))
+                await blob.UploadAsync(memoryStream, overwrite: true, cancellationToken: cancellationToken);
+        }
+
+        private Task<BlobContainerClient> GetBlobContainerClient(CancellationToken cancellationToken)
+        {
+            var containerClient = _blobServiceClient.GetBlobContainerClient("files-container");
+            return containerClient
+                .CreateIfNotExistsAsync(cancellationToken: cancellationToken)
+                .ContinueWith(_ => containerClient);
         }
     }
 }

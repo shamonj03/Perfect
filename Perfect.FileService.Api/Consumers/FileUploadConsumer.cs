@@ -1,15 +1,15 @@
 ﻿using MassTransit;
-using Perfect.FileService.Api.Consumers.FileUpload.Models;
 using Perfect.FileService.Application.Files.Interfaces;
 using Perfect.FileService.Application.Files.Requests;
+using Perfect.Messages.Commands;
 
 namespace Perfect.FileService.Api.Consumers
 {
     public class FileUploadConsumer : IConsumer<FileUploadCommand>
     {
-        private readonly IFileUploadService _fileUploadService;
+        private readonly IFileService _fileUploadService;
 
-        public FileUploadConsumer(IFileUploadService fileUploadService)
+        public FileUploadConsumer(IFileService fileUploadService)
         {
             _fileUploadService = fileUploadService;
         }
@@ -19,8 +19,14 @@ namespace Perfect.FileService.Api.Consumers
             var request = context.Message;
             var content = await request.Content.Value;
 
-            var command = new UploadFileCommand(request.FileName, request.Length, content);
-            await _fileUploadService.UploadAsync(command, context.CancellationToken);
+            using (var stream = content)
+            using (var memoryStream = new MemoryStream())
+            {
+                await stream.CopyToAsync(memoryStream);
+
+                var command = new UploadFileCommand(request.FileName, memoryStream.Length, memoryStream.ToArray());
+                await _fileUploadService.SaveFileAsync(command, context.CancellationToken);
+            }
         }
     }
 }

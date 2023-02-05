@@ -36,10 +36,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Endpoints\V1\Files\Requests\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Perfect.FileService.Application\Perfect.FileService.Application.csproj" />
     <ProjectReference Include="..\Perfect.FileService.Infrastructure\Perfect.FileService.Infrastructure.csproj" />
   </ItemGroup>

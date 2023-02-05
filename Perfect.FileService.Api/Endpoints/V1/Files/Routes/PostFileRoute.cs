@@ -5,20 +5,24 @@ using Perfect.FileService.Application.Files.Requests;
 
 namespace Perfect.FileService.Api.Endpoints.V1.Files.Routes
 {
-    public static class PostFileRoute
+    public static class PostFileEndpoint
     {
         public static async Task<IResult> Execute(
             [FromServices] IValidator<IFormFile> validator,
-            [FromServices] IFileUploadService fileUploadService,
+            [FromServices] IFileService fileUploadService,
             [FromForm(Name = "file")] IFormFile request,
             CancellationToken cancellationToken
         )
         {
             await validator.ValidateAndThrowAsync(request);
 
-            var command = new UploadFileCommand(request.FileName, request.Length, request.OpenReadStream());
-            await fileUploadService.UploadAsync(command, cancellationToken);
+            using (var stream = request.OpenReadStream())
+            using (var memoryStream = new MemoryStream()) {
+                await stream.CopyToAsync(memoryStream);
 
+                var command = new UploadFileCommand(request.FileName, memoryStream.Length, memoryStream.ToArray());
+                await fileUploadService.SaveFileAsync(command, cancellationToken);
+            }
             return Results.Accepted();
         }
     }

@@ -1,6 +1,6 @@
 ﻿using MassTransit;
 
-namespace Perfect.FileService.Api.Consumers.FileUpload.Models
+namespace Perfect.Messages.Commands
 {
     public record FileUploadCommand
     {

@@ -27,8 +27,8 @@ namespace Perfect.SagaService.Host.StateMachine
             );
         }
 
-        public State AnalyzeFile { get; set; }
+        public State? AnalyzeFile { get; set; }
 
-        public Event<FileReceivedEvent> FileReceived { get; private set; }
+        public Event<FileReceivedEvent>? FileReceived { get; set; }
     }
 }
