@@ -9,7 +9,8 @@ using Xunit;
 
 namespace Perfect.FileService.Infrastructure.Tests.IntegrationTests.Files
 {
-    public class BlobFileRepositoryTests : IClassFixture<AzuriteTestFixture>
+    [Collection("Azurite")]
+    public class BlobFileRepositoryTests
     {
         private readonly IFixture _fixture;
 

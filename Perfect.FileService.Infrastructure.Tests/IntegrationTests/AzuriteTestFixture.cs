@@ -6,6 +6,14 @@ using Xunit;
 
 namespace Perfect.FileService.Infrastructure.Tests.IntegrationTests
 {
+    [CollectionDefinition("Azurite")]
+    public class AzuriteTestCollection : ICollectionFixture<AzuriteTestFixture>
+    {
+        // This class has no code, and is never created. Its purpose is simply
+        // to be the place to apply [CollectionDefinition] and all the
+        // ICollectionFixture<> interfaces.
+    }
+
     public class AzuriteTestFixture : IAsyncLifetime
     {
         public readonly BlobServiceClient BlobClient;
@@ -25,6 +33,8 @@ namespace Perfect.FileService.Infrastructure.Tests.IntegrationTests
             _container = new ContainerBuilder()
                 .WithImage("mcr.microsoft.com/azure-storage/azurite")
                 .WithPortBinding(Port, 10000)
+                .WithAutoRemove(true)
+                .WithCleanUp(true)
                 //.WithCommand($"azurite-blob --blobHost 0.0.0.0 --blobPort 10000")
                 .Build();
         }
