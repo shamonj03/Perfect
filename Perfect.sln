@@ -29,7 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AnalyzerService", "Analyzer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Perfect.AnalyzerService.Application.Tests", "Perfect.AnalyzerService.Application.Tests\Perfect.AnalyzerService.Application.Tests.csproj", "{525488EC-744C-41D0-85B6-55884B16A27D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perfect.Tester", "..\Perfect.Tester\Perfect.Tester.csproj", "{289A51FE-F111-4ED2-BAC1-8C697536752C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Perfect.Tester", "..\Perfect.Tester\Perfect.Tester.csproj", "{289A51FE-F111-4ED2-BAC1-8C697536752C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

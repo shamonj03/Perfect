@@ -1,6 +1,26 @@
 version: '3.4'
 
 services:
+  rabbitmq:
+    ports:
+      - 15672:15672
+      - 5672:5672
+    #volumes:
+    #  - rabbitvolume:/var/lib/rabbitmq
+
+  azurite:
+    command: 'azurite-blob --blobHost 0.0.0.0 --blobPort 10000'
+    ports:
+      - 10000:10000
+    #volumes:
+    #  - azuritevolume:/data 
+   
+  mongo:
+    ports:
+      - 27017:27017
+    volumes:
+      - mongovolume:/data/db
+
   perfect.sagaservice.host:
     environment:
       - DOTNET_ENVIRONMENT=Development

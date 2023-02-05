@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Perfect.FileService.Api.Configuration.Models
+﻿namespace Perfect.FileService.Api.Configuration.Models
 {
     public class AzureServiceBusSettings
     {
         public const string Section = "AzureServiceBus";
 
-        public string ConnectionString { get; set; }
+        public string ConnectionString { get; set; } = string.Empty;
     }
 }

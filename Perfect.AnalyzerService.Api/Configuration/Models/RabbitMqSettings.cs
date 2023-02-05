@@ -4,6 +4,6 @@
     {
         public const string Section = "RabbitMq";
 
-        public string ConnectionString { get; set; }
+        public string ConnectionString { get; set; } = string.Empty;
     }
 }

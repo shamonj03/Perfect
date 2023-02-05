@@ -1,23 +1,28 @@
 version: '3.4'
 
+volumes:
+  rabbitvolume:
+  azuritevolume:
+  mongovolume:
+
 services:
   rabbitmq:
     image: rabbitmq:3-management
     container_name: 'some-rabbit'
-    ports:
-      - 15672:15672
-      - 5672:5672
     networks:
         - rabbitmq_go_net
 
-  azureite:
+  azurite:
     image: mcr.microsoft.com/azure-storage/azurite
     container_name: 'some-azurite'
-    ports:
-     - 10000:10000
-    command: 'azurite-blob --blobHost 0.0.0.0 --blobPort 10000'
     networks:
-        - azureite_go_net
+        - azurite_go_net
+   
+  mongo:
+    image: mongo
+    container_name: 'some-mongo'
+    networks:
+        - mongo_go_net
         
   perfect.sagaservice.host:
     image: ${DOCKER_REGISTRY-}perfectsagaservicehost
@@ -43,5 +48,7 @@ services:
 networks:
   rabbitmq_go_net:
     driver: bridge
-  azureite_go_net:
+  azurite_go_net:
+    driver: bridge
+  mongo_go_net:
     driver: bridge

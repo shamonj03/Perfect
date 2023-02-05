@@ -1,9 +1,11 @@
 ﻿using MassTransit;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Perfect.Messages.Events;
 using Perfect.SagaService.Host.Configuration.Models;
-using Perfect.SagaService.Host.Consumers;
+using Perfect.SagaService.Host.StateMachine;
 
 await Host.CreateDefaultBuilder(args)
     .ConfigureServices((ctx, services) =>
@@ -16,7 +18,20 @@ await Host.CreateDefaultBuilder(args)
 
         services.AddMassTransit(x =>
         {
-            x.AddConsumer<FileReceivedConsumer>();
+            //x.AddSagaRepository<FileState>();
+            x.AddSagaStateMachine<FileStateMachine, FileState>()
+                .MongoDbRepository(r =>
+                {
+                    var mongoSettings = configuration.GetSection(MongoSettings.Section).Get<MongoSettings>();
+
+                    r.Connection = mongoSettings?.ConnectionString
+                        ?? throw new ArgumentNullException(nameof(MongoSettings.ConnectionString));
+                    r.DatabaseName = mongoSettings?.DatabaseName
+                        ?? throw new ArgumentNullException(nameof(MongoSettings.DatabaseName));
+                    r.CollectionName = mongoSettings?.CollectionName
+                        ?? throw new ArgumentNullException(nameof(MongoSettings.CollectionName));
+                });
+
 
             //x.UsingAzureServiceBus((context, cfg) =>
             //{
@@ -34,9 +49,15 @@ await Host.CreateDefaultBuilder(args)
                 var settings = context.GetRequiredService<IOptions<RabbitMqSettings>>();
                 cfg.Host(settings.Value.ConnectionString);
 
-                cfg.ReceiveEndpoint("saga-file-recieved-event", x =>
+                cfg.ReceiveEndpoint("file-saga-queue", x =>
                 {
-                    x.ConfigureConsumer<FileReceivedConsumer>(context);
+                    const int ConcurrencyLimit = 20;
+
+                    x.UseInMemoryOutbox();
+                    x.ConfigureSaga<FileState>(context, s =>
+                    {
+                        s.Message<FileReceivedEvent>(x => x.UsePartitioner(ConcurrencyLimit, y => y.Message.FileName));
+                    });
                 });
             });
         });
