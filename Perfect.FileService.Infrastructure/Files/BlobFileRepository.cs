@@ -6,6 +6,8 @@ namespace Perfect.FileService.Infrastructure.Files
 {
     public class BlobFileRepository : IFileRepository
     {
+        public const string ContainerName = "files-container";
+
         private readonly BlobServiceClient _blobServiceClient;
 
         public BlobFileRepository(BlobServiceClient blobServiceClient)
@@ -44,7 +46,7 @@ namespace Perfect.FileService.Infrastructure.Files
 
         private Task<BlobContainerClient> GetBlobContainerClient(CancellationToken cancellationToken)
         {
-            var containerClient = _blobServiceClient.GetBlobContainerClient("files-container");
+            var containerClient = _blobServiceClient.GetBlobContainerClient(ContainerName);
             return containerClient
                 .CreateIfNotExistsAsync(cancellationToken: cancellationToken)
                 .ContinueWith(_ => containerClient);
