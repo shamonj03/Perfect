@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Perfect.Messages.Commands;
 using Perfect.Messages.Events;
 using Perfect.SagaService.Host.Configuration.Models;
 using Perfect.SagaService.Host.StateMachine;
@@ -15,6 +16,9 @@ await Host.CreateDefaultBuilder(args)
         // Application Settings
         services.Configure<AzureServiceBusSettings>(configuration.GetSection(AzureServiceBusSettings.Section));
         services.Configure<RabbitMqSettings>(configuration.GetSection(RabbitMqSettings.Section));
+
+
+        EndpointConvention.Map<AnalyzeFileCommand>(new Uri("queue:analyzer-service-analyze-command"));
 
         services.AddMassTransit(x =>
         {

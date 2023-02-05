@@ -1,6 +1,7 @@
 ﻿using MassTransit;
 using Microsoft.Extensions.Options;
 using Perfect.AnalyzerService.Api.Configuration.Models;
+using Perfect.AnalyzerService.Api.Consumers;
 
 namespace Perfect.AnalyzerService.Api.Configuration
 {
@@ -10,6 +11,8 @@ namespace Perfect.AnalyzerService.Api.Configuration
         {
             services.AddMassTransit(x =>
             {
+                x.AddConsumer<AnalyzeFileConsumer>();
+
                 //x.UsingAzureServiceBus((context, cfg) =>
                 //{
                 //    var settings = context.GetRequiredService<IOptions<AzureServiceBusSettings>>();
@@ -20,6 +23,11 @@ namespace Perfect.AnalyzerService.Api.Configuration
                 {
                     var settings = context.GetRequiredService<IOptions<RabbitMqSettings>>();
                     cfg.Host(settings.Value.ConnectionString);
+
+                    cfg.ReceiveEndpoint("analyzer-service-analyze-command", y =>
+                    {
+                        y.ConfigureConsumer<AnalyzeFileConsumer>(context);
+                    });
                 });
             });
         }

@@ -1,7 +1,7 @@
 ﻿using MassTransit;
 using Perfect.Messages.Commands;
 
-namespace Perfect.AnalyzerService.Infrastructure.Consumers;
+namespace Perfect.AnalyzerService.Api.Consumers;
 
 public class AnalyzeFileConsumer : IConsumer<AnalyzeFileCommand>
 {

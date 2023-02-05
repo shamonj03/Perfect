@@ -1,4 +1,5 @@
 ﻿using MassTransit;
+using Perfect.Messages.Commands;
 using Perfect.Messages.Events;
 
 namespace Perfect.SagaService.Host.StateMachine
@@ -9,23 +10,25 @@ namespace Perfect.SagaService.Host.StateMachine
         {
             InstanceState(x => x.CurrentState);
 
-            Event(() => FileReceivedEvent, x =>
+            Event(() => FileReceived, x =>
                 x.CorrelateBy(y => y.FileName, y => y.Message.FileName)
                  .SelectId(_ => NewId.NextGuid())
             );
 
             Initially(
-                When(FileReceivedEvent)
-                .Then(context => 
-                    context.Saga.FileName = context.Message.FileName)
-                .Then(context => 
-                    Console.WriteLine(context.Message.FileName))
-                .TransitionTo(FileReceived)
+                When(FileReceived)
+                    .Then(context => 
+                        context.Saga.FileName = context.Message.FileName)
+                    .SendAsync(context => context.Init<AnalyzeFileCommand>(new
+                    {
+                        FileName = context.Message.FileName
+                    }))
+                    .TransitionTo(AnalyzeFile)
             );
         }
 
-        public State FileReceived { get; set; }
+        public State AnalyzeFile { get; set; }
 
-        public Event<FileReceivedEvent> FileReceivedEvent { get; private set; }
+        public Event<FileReceivedEvent> FileReceived { get; private set; }
     }
 }
