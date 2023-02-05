@@ -26,6 +26,8 @@ namespace Perfect.AnalyzerService.Api.Configuration
 
                     cfg.ReceiveEndpoint("analyzer-service-analyze-command", y =>
                     {
+                        //y.ConfigureConsumeTopology = false;
+                        //y.Bind("analyze-command");
                         y.ConfigureConsumer<AnalyzeFileConsumer>(context);
                     });
                 });
