@@ -8,6 +8,6 @@ namespace Perfect.Messages.Commands
 
         public long Length { get; init; }
 
-        public MessageData<Stream> Content { get; init; } = null!;
+        public MessageData<byte[]> Content { get; init; } = null!;
     }
 }

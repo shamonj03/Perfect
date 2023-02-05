@@ -19,14 +19,8 @@ namespace Perfect.FileService.Api.Consumers
             var request = context.Message;
             var content = await request.Content.Value;
 
-            using (var stream = content)
-            using (var memoryStream = new MemoryStream())
-            {
-                await stream.CopyToAsync(memoryStream);
-
-                var command = new UploadFileCommand(request.FileName, memoryStream.Length, memoryStream.ToArray());
-                await _fileUploadService.SaveFileAsync(command, context.CancellationToken);
-            }
+            var command = new UploadFileCommand(request.FileName, request.Length, content);
+            await _fileUploadService.SaveFileAsync(command, context.CancellationToken);
         }
     }
 }
