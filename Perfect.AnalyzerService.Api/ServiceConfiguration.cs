@@ -1,6 +1,12 @@
 ﻿using FluentValidation;
 using Perfect.AnalyzerService.Api.Configuration;
 using Perfect.AnalyzerService.Api.Configuration.Models;
+using Perfect.AnalyzerService.Application.Common;
+using Perfect.AnalyzerService.Application.FileService;
+using Perfect.AnalyzerService.Application.OddLetters;
+using Perfect.AnalyzerService.Application.OddLetters.Interfaces;
+using Perfect.AnalyzerService.Infrastructure.Common;
+using Perfect.AnalyzerService.Infrastructure.HttpClients;
 
 namespace Perfect.AnalyzerService.Api
 {
@@ -18,8 +24,15 @@ namespace Perfect.AnalyzerService.Api
 
             // Application
             services.AddValidatorsFromAssemblyContaining<Program>();
+            services.AddScoped<IOddLetterAnalyzer, OddLetterAnalyzer>();
+            services.AddScoped<IOddLetterAnalyzerService, OddLetterAnalyzerService>();
 
             // Infrastructure
+            services.AddScoped<IMessageSender, MessageSender>();
+            services.AddHttpClient<IFileServiceClient, FileServiceClient>(x =>
+            {
+                x.BaseAddress = new Uri("https://localhost:7214");
+            });
         }
     }
 }

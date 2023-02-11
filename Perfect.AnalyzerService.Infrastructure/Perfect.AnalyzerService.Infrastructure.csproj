@@ -11,6 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Perfect.AnalyzerService.Application\Perfect.AnalyzerService.Application.csproj" />
       <ProjectReference Include="..\Perfect.Messages\Perfect.Messages.csproj" />
     </ItemGroup>
 

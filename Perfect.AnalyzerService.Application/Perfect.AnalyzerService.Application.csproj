@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Perfect.Messages\Perfect.Messages.csproj" />
+    </ItemGroup>
+
 </Project>

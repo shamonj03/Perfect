@@ -27,6 +27,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Perfect.AnalyzerService.Application\Perfect.AnalyzerService.Application.csproj" />
       <ProjectReference Include="..\Perfect.AnalyzerService.Infrastructure\Perfect.AnalyzerService.Infrastructure.csproj" />
     </ItemGroup>
 
