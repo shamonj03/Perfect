@@ -1,21 +1,27 @@
 ﻿using MassTransit;
+using Perfect.AnalyzerService.Application.FileService;
 using Perfect.AnalyzerService.Application.OddLetters.Interfaces;
-using Perfect.AnalyzerService.Application.OddLetters.Models;
 using Perfect.Messages.Commands;
+using System.Text;
 
 namespace Perfect.AnalyzerService.Api.Consumers;
 
 public class AnalyzeFileConsumer : IConsumer<AnalyzeFileCommand>
 {
+    private readonly IFileServiceClient _fileServiceClient;
     private readonly IOddLetterAnalyzerService _oddLetterAnalyzerService;
 
-    public AnalyzeFileConsumer(IOddLetterAnalyzerService oddLetterAnalyzerService)
+    public AnalyzeFileConsumer(IFileServiceClient fileServiceClient, IOddLetterAnalyzerService oddLetterAnalyzerService)
     {
+        _fileServiceClient = fileServiceClient;
         _oddLetterAnalyzerService = oddLetterAnalyzerService;
     }
 
-    public Task Consume(ConsumeContext<AnalyzeFileCommand> context)
+    public async Task Consume(ConsumeContext<AnalyzeFileCommand> context)
     {
-        return _oddLetterAnalyzerService.ExecuteAsync(new OddLetterAnalyzerRequest(context.Message.FileName), context.CancellationToken);
+        // TODO: Handle file not found.
+        var file = await _fileServiceClient.GetFileAsync(context.Message.FileName, context.CancellationToken);
+        var content = Encoding.UTF8.GetString(file.Content);
+        await _oddLetterAnalyzerService.ExecuteAsync(new (content), context.CancellationToken);
     }
 }

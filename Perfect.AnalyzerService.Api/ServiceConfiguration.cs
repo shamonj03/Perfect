@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
 using Perfect.AnalyzerService.Api.Configuration;
 using Perfect.AnalyzerService.Api.Configuration.Models;
+using Perfect.AnalyzerService.Application.BannedWords;
+using Perfect.AnalyzerService.Application.BannedWords.Interfaces;
 using Perfect.AnalyzerService.Application.Common;
 using Perfect.AnalyzerService.Application.FileService;
 using Perfect.AnalyzerService.Application.OddLetters;
@@ -26,6 +28,8 @@ namespace Perfect.AnalyzerService.Api
             services.AddValidatorsFromAssemblyContaining<Program>();
             services.AddScoped<IOddLetterAnalyzer, OddLetterAnalyzer>();
             services.AddScoped<IOddLetterAnalyzerService, OddLetterAnalyzerService>();
+            services.AddScoped<IBannedWordAnalyzer, BannedWordAnalyzer>();
+            services.AddScoped<IBannedWordAnalyzerService, BannedWordAnalyzerService>();
 
             // Infrastructure
             services.AddScoped<IMessageSender, MessageSender>();

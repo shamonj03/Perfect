@@ -4,9 +4,9 @@ namespace Perfect.AnalyzerService.Application.OddLetters
 {
     public class OddLetterAnalyzer : IOddLetterAnalyzer
     {
-        public int Analyze()
+        public int Analyze(string content)
         {
-            throw new NotImplementedException();
+            return content.Count(x => x % 2 == 0);
         }
     }
 }
