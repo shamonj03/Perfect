@@ -31,6 +31,7 @@ namespace Perfect.FileService.Application.Files
             await _fileRepository.SaveFileAsync(new (command.FileName, command.Length, command.Content), cancellationToken);
             await _messageSender.PublishEventAsync(new FileReceivedEvent
             {
+                FileId = Guid.NewGuid(),
                 FileName = command.FileName,
             }, cancellationToken);
         }

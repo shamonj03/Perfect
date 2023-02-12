@@ -2,6 +2,8 @@
 {
     public record OddLettersAnalyzedEvent
     {
-        public int Count { get; set; }
+        public Guid FileId { get; init; }
+        public string FileName { get; init; } = string.Empty;
+        public int Count { get; init; }
     }
 }

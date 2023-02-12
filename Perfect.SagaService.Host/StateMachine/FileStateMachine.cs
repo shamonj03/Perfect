@@ -10,10 +10,10 @@ namespace Perfect.SagaService.Host.StateMachine
         {
             InstanceState(x => x.CurrentState);
 
-            Event(() => FileReceived, x =>
-                x.CorrelateBy(y => y.FileName, y => y.Message.FileName)
-                 .SelectId(x => x.CorrelationId ?? NewId.NextGuid())
-            );
+            State(() => AnalyzeFile);
+            Event(() => FileReceived, x => x.CorrelateById(y => y.Message.FileId));
+            Event(() => OddLettersAnalyzed, x => x.CorrelateById(y => y.Message.FileId));
+            Event(() => BannedWordsAnalzyed, x => x.CorrelateById(y => y.Message.FileId));
 
             Initially(
                 When(FileReceived)
@@ -21,14 +21,35 @@ namespace Perfect.SagaService.Host.StateMachine
                         context.Saga.FileName = context.Message.FileName)
                     .SendAsync(context => context.Init<AnalyzeFileCommand>(new
                     {
+                        CorrelationId = context.CorrelationId,
                         FileName = context.Message.FileName
                     }))
                     .TransitionTo(AnalyzeFile)
             );
+
+            CompositeEvent(FileAnalzed, x => x.FileAnalyzedStatus,
+                OddLettersAnalyzed, BannedWordsAnalzyed);
+
+            During(AnalyzeFile,
+                When(OddLettersAnalyzed)
+                    .Then(context => context.Saga.OddLetterCount = context.Message.Count),
+                When(BannedWordsAnalzyed)
+                    .Then(context => context.Saga.BannedWordCount = context.Message.Count),
+                When(FileAnalzed)
+                    .Then(_ =>
+                        Console.WriteLine("We did it!"))
+                    .Finalize()
+            );
+
+            SetCompletedWhenFinalized();
         }
 
         public State? AnalyzeFile { get; set; }
 
         public Event<FileReceivedEvent>? FileReceived { get; set; }
+        public Event<OddLettersAnalyzedEvent>? OddLettersAnalyzed { get; set; }
+        public Event<BannedWordsAnalzyedEvent>? BannedWordsAnalzyed { get; set; }
+
+        public Event? FileAnalzed { get; set; }
     }
 }

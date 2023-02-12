@@ -22,6 +22,8 @@ namespace Perfect.AnalyzerService.Application.BannedWords
 
             return _messageSender.PublishEventAsync(new BannedWordsAnalzyedEvent
             {
+                FileId = request.CorrelationId,
+                FileName = request.FileName,
                 Count = result
             }, cancellationToken);
         }

@@ -60,7 +60,9 @@ await Host.CreateDefaultBuilder(args)
                     x.UseInMemoryOutbox();
                     x.ConfigureSaga<FileState>(context, s =>
                     {
-                        s.Message<FileReceivedEvent>(x => x.UsePartitioner(ConcurrencyLimit, y => y.Message.FileName));
+                        s.Message<FileReceivedEvent>(x => x.UsePartitioner(ConcurrencyLimit, y => y.Message.FileId));
+                        s.Message<OddLettersAnalyzedEvent>(x => x.UsePartitioner(ConcurrencyLimit, y => y.Message.FileId));
+                        s.Message<BannedWordsAnalzyedEvent>(x => x.UsePartitioner(ConcurrencyLimit, y => y.Message.FileId));
                     });
                 });
             });

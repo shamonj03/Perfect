@@ -22,6 +22,8 @@ namespace Perfect.AnalyzerService.Application.OddLetters
 
             return _messageSender.PublishEventAsync(new OddLettersAnalyzedEvent
             {
+                FileId = request.CorrelationId,
+                FileName = request.FileName,
                 Count = result
             }, cancellationToken);
         }

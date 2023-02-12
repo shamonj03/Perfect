@@ -18,11 +18,9 @@ namespace Perfect.AnalyzerService.Infrastructure.HttpClients
         {
             HttpRequestMessage CreateMessage()
             {
-                var uriBuilder = new UriBuilder("api/v1/files");
                 var queryBuilder = HttpUtility.ParseQueryString(string.Empty);
                 queryBuilder["FileName"] = fileName;
-                uriBuilder.Query = queryBuilder.ToString();
-                return new HttpRequestMessage(HttpMethod.Get, uriBuilder.ToString());
+                return new HttpRequestMessage(HttpMethod.Get, $"api/v1/files?{queryBuilder}");
             }
 
             var request = await _httpClient.SendAsync(CreateMessage(), cancellationToken);

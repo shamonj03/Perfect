@@ -35,7 +35,7 @@ namespace Perfect.AnalyzerService.Api
             services.AddScoped<IMessageSender, MessageSender>();
             services.AddHttpClient<IFileServiceClient, FileServiceClient>(x =>
             {
-                x.BaseAddress = new Uri("https://localhost:7214");
+                x.BaseAddress = new Uri("https://host.docker.internal:7214/");
             });
         }
     }

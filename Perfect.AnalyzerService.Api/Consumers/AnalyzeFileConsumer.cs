@@ -1,4 +1,5 @@
-﻿using MassTransit;
+﻿using Azure.Messaging;
+using MassTransit;
 using Perfect.AnalyzerService.Application.FileService;
 using Perfect.AnalyzerService.Application.OddLetters.Interfaces;
 using Perfect.Messages.Commands;
@@ -19,9 +20,11 @@ public class AnalyzeFileConsumer : IConsumer<AnalyzeFileCommand>
 
     public async Task Consume(ConsumeContext<AnalyzeFileCommand> context)
     {
+        var message = context.Message;
+
         // TODO: Handle file not found.
-        var file = await _fileServiceClient.GetFileAsync(context.Message.FileName, context.CancellationToken);
+        var file = await _fileServiceClient.GetFileAsync(message.FileName, context.CancellationToken);
         var content = Encoding.UTF8.GetString(file.Content);
-        await _oddLetterAnalyzerService.ExecuteAsync(new (content), context.CancellationToken);
+        await _oddLetterAnalyzerService.ExecuteAsync(new (message.CorrelationId, message.FileName, content), context.CancellationToken);
     }
 }
