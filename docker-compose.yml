@@ -24,13 +24,6 @@ services:
     networks:
         - mongo_go_net
         
-  perfect.sagaservice.host:
-    image: ${DOCKER_REGISTRY-}perfectsagaservicehost
-    container_name: 'perfect.sagaservice.host'
-    build:
-      context: .
-      dockerfile: Perfect.SagaService.Host/Dockerfile
-
   perfect.fileservice.api:
     image: ${DOCKER_REGISTRY-}perfectfileserviceapi
     container_name: 'perfect.fileservice.api'
@@ -45,6 +38,13 @@ services:
       context: .
       dockerfile: Perfect.AnalyzerService.Api/Dockerfile
       
+  perfect.sagaservice.host:
+    image: ${DOCKER_REGISTRY-}perfectsagaservicehost
+    container_name: 'perfect.sagaservice.host'
+    build:
+      context: .
+      dockerfile: Perfect.SagaService.Host/Dockerfile
+
 networks:
   rabbitmq_go_net:
     driver: bridge

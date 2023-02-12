@@ -7,7 +7,6 @@ namespace Perfect.FileService.Api
     {
         public static WebApplication RegisterApplication(this WebApplication app)
         {
-            app.UseHttpsRedirection();
             app.UseMiddleware<InternalErrorMiddleware>();
 
             app.NewVersionedApi()

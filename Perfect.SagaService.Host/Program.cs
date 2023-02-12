@@ -52,15 +52,17 @@ await Host.CreateDefaultBuilder(args)
             {
                 var settings = context.GetRequiredService<IOptions<RabbitMqSettings>>();
                 cfg.Host(settings.Value.ConnectionString);
-
+                
                 cfg.ReceiveEndpoint("file-saga-queue", x =>
                 {
-                    const int ConcurrencyLimit = 20;
+                    const int ConcurrencyLimit = 20; 
+                    x.PrefetchCount = ConcurrencyLimit; 
+                    x.UseMessageRetry(r => r.Interval(5, 1000));
 
                     x.UseInMemoryOutbox();
                     x.ConfigureSaga<FileState>(context, s =>
                     {
-                        s.Message<FileReceivedEvent>(x => x.UsePartitioner(ConcurrencyLimit, y => y.Message.FileId));
+                        s.Message<FileReceivedEvent>(x => x.UsePartitioner(ConcurrencyLimit, y => y.Message.FileName));
                         s.Message<OddLettersAnalyzedEvent>(x => x.UsePartitioner(ConcurrencyLimit, y => y.Message.FileId));
                         s.Message<BannedWordsAnalzyedEvent>(x => x.UsePartitioner(ConcurrencyLimit, y => y.Message.FileId));
                     });

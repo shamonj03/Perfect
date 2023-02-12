@@ -1,6 +1,7 @@
 ﻿using Perfect.AnalyzerService.Application.FileService;
 using Perfect.AnalyzerService.Application.FileService.Models;
 using System.Net.Http.Json;
+using System.Text;
 using System.Web;
 
 namespace Perfect.AnalyzerService.Infrastructure.HttpClients
@@ -24,8 +25,10 @@ namespace Perfect.AnalyzerService.Infrastructure.HttpClients
             }
 
             var request = await _httpClient.SendAsync(CreateMessage(), cancellationToken);
+
+            var content = await request.Content.ReadAsStringAsync();
             request.EnsureSuccessStatusCode();
-            return (await request.Content.ReadFromJsonAsync<FileModel>(cancellationToken: cancellationToken))!;
+            return new FileModel(fileName, content);
         }
     }
 }

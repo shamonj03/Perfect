@@ -10,15 +10,19 @@ namespace Perfect.SagaService.Host.StateMachine
         {
             InstanceState(x => x.CurrentState);
 
-            State(() => AnalyzeFile);
-            Event(() => FileReceived, x => x.CorrelateById(y => y.Message.FileId));
+            Event(() => FileReceived, x => 
+                x.CorrelateBy(y => y.FileName, y => y.Message.FileName)
+                    .SelectId(y => y.CorrelationId ?? NewId.NextGuid())
+            );
             Event(() => OddLettersAnalyzed, x => x.CorrelateById(y => y.Message.FileId));
             Event(() => BannedWordsAnalzyed, x => x.CorrelateById(y => y.Message.FileId));
 
+            CompositeEvent(() => FileAnalzed, x => x.FileAnalyzedStatus,
+                OddLettersAnalyzed, BannedWordsAnalzyed);
+
             Initially(
                 When(FileReceived)
-                    .Then(context => 
-                        context.Saga.FileName = context.Message.FileName)
+                    .Then(context => context.Saga.FileName = context.Message.FileName)
                     .SendAsync(context => context.Init<AnalyzeFileCommand>(new
                     {
                         CorrelationId = context.CorrelationId,
@@ -27,21 +31,20 @@ namespace Perfect.SagaService.Host.StateMachine
                     .TransitionTo(AnalyzeFile)
             );
 
-            CompositeEvent(FileAnalzed, x => x.FileAnalyzedStatus,
-                OddLettersAnalyzed, BannedWordsAnalzyed);
 
             During(AnalyzeFile,
+                Ignore(FileReceived),
                 When(OddLettersAnalyzed)
                     .Then(context => context.Saga.OddLetterCount = context.Message.Count),
                 When(BannedWordsAnalzyed)
                     .Then(context => context.Saga.BannedWordCount = context.Message.Count),
                 When(FileAnalzed)
-                    .Then(_ =>
+                    .Then(x =>
                         Console.WriteLine("We did it!"))
                     .Finalize()
             );
 
-            SetCompletedWhenFinalized();
+            //SetCompletedWhenFinalized();
         }
 
         public State? AnalyzeFile { get; set; }
