@@ -1,4 +1,4 @@
-﻿namespace Perfect.FileService.Application.Settings
+﻿namespace Perfect.FileService.Infrastructure.Settings
 {
     public class RabbitMqSettings
     {

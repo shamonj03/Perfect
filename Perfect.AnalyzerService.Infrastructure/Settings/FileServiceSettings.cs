@@ -1,4 +1,4 @@
-﻿namespace Perfect.AnalyzerService.Application.Settings
+﻿namespace Perfect.AnalyzerService.Infrastructure.Settings
 {
     public class FileServiceSettings
     {

@@ -5,8 +5,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Perfect.Messages.Commands;
 using Perfect.Messages.Events;
-using Perfect.SagaService.Application.Settings;
 using Perfect.SagaService.Host.StateMachine;
+using Perfect.SagaService.Infrastructure.Settings;
 
 await Host.CreateDefaultBuilder(args)
     .ConfigureServices((ctx, services) =>

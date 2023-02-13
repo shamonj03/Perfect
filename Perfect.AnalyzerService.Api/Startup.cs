@@ -9,9 +9,9 @@ using Perfect.AnalyzerService.Application.Common;
 using Perfect.AnalyzerService.Application.FileService;
 using Perfect.AnalyzerService.Application.OddLetters;
 using Perfect.AnalyzerService.Application.OddLetters.Interfaces;
-using Perfect.AnalyzerService.Application.Settings;
 using Perfect.AnalyzerService.Infrastructure.Common;
 using Perfect.AnalyzerService.Infrastructure.FileService;
+using Perfect.AnalyzerService.Infrastructure.Settings;
 
 namespace Perfect.AnalyzerService.Api
 {

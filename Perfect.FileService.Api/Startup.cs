@@ -7,10 +7,10 @@ using Perfect.FileService.Api.Configuration;
 using Perfect.FileService.Application.Common;
 using Perfect.FileService.Application.Files;
 using Perfect.FileService.Application.Files.Interfaces;
-using Perfect.FileService.Application.Settings;
 using Perfect.FileService.Domain.Services;
 using Perfect.FileService.Infrastructure.Common;
 using Perfect.FileService.Infrastructure.Files;
+using Perfect.FileService.Infrastructure.Settings;
 
 namespace Perfect.FileService.Api
 {

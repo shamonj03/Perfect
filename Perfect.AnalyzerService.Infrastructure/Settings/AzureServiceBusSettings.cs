@@ -1,4 +1,4 @@
-﻿namespace Perfect.FileService.Application.Settings
+﻿namespace Perfect.AnalyzerService.Infrastructure.Settings
 {
     public class AzureServiceBusSettings
     {

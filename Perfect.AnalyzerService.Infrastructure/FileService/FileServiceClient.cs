@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using Perfect.AnalyzerService.Application.FileService;
 using Perfect.AnalyzerService.Application.FileService.Models;
-using Perfect.AnalyzerService.Application.Settings;
+using Perfect.AnalyzerService.Infrastructure.Settings;
 using System.Web;
 
 namespace Perfect.AnalyzerService.Infrastructure.FileService

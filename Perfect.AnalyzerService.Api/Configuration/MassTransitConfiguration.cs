@@ -1,7 +1,7 @@
 ﻿using MassTransit;
 using Microsoft.Extensions.Options;
 using Perfect.AnalyzerService.Api.Consumers;
-using Perfect.AnalyzerService.Application.Settings;
+using Perfect.AnalyzerService.Infrastructure.Settings;
 
 namespace Perfect.AnalyzerService.Api.Configuration
 {

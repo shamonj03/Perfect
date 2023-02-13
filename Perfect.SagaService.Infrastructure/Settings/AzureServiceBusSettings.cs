@@ -1,4 +1,4 @@
-﻿namespace Perfect.AnalyzerService.Application.Settings
+﻿namespace Perfect.SagaService.Infrastructure.Settings
 {
     public class AzureServiceBusSettings
     {
