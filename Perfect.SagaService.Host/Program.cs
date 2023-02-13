@@ -5,7 +5,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Perfect.Messages.Commands;
 using Perfect.Messages.Events;
-using Perfect.SagaService.Host.Configuration.Models;
+using Perfect.SagaService.Application.Settings;
 using Perfect.SagaService.Host.StateMachine;
 
 await Host.CreateDefaultBuilder(args)
@@ -15,8 +15,22 @@ await Host.CreateDefaultBuilder(args)
 
         // Application Settings
         services.Configure<AzureServiceBusSettings>(configuration.GetSection(AzureServiceBusSettings.Section));
-        services.Configure<RabbitMqSettings>(configuration.GetSection(RabbitMqSettings.Section));
+        services.PostConfigure<AzureServiceBusSettings>(x =>
+        {
+            x.ConnectionString = configuration.GetConnectionString(AzureServiceBusSettings.Section);
+        });
 
+        services.Configure<RabbitMqSettings>(configuration.GetSection(RabbitMqSettings.Section));
+        services.PostConfigure<RabbitMqSettings>(x =>
+        {
+            x.ConnectionString = configuration.GetConnectionString(RabbitMqSettings.Section);
+        });
+
+        services.Configure<MongoSettings>(configuration.GetSection(MongoSettings.Section));
+        services.PostConfigure<MongoSettings>(x =>
+        {
+            x.ConnectionString = configuration.GetConnectionString(MongoSettings.Section);
+        });
 
         EndpointConvention.Map<AnalyzeFileCommand>(new Uri("queue:analyzer-service-analyze-command"));
 
@@ -26,9 +40,10 @@ await Host.CreateDefaultBuilder(args)
             x.AddSagaStateMachine<FileStateMachine, FileState>()
                 .MongoDbRepository(r =>
                 {
+                    var connectionString = configuration.GetConnectionString(MongoSettings.Section);
                     var mongoSettings = configuration.GetSection(MongoSettings.Section).Get<MongoSettings>();
 
-                    r.Connection = mongoSettings?.ConnectionString
+                    r.Connection = connectionString
                         ?? throw new ArgumentNullException(nameof(MongoSettings.ConnectionString));
                     r.DatabaseName = mongoSettings?.DatabaseName
                         ?? throw new ArgumentNullException(nameof(MongoSettings.DatabaseName));
@@ -52,8 +67,8 @@ await Host.CreateDefaultBuilder(args)
             {
                 var settings = context.GetRequiredService<IOptions<RabbitMqSettings>>();
                 cfg.Host(settings.Value.ConnectionString);
-                
-                cfg.ReceiveEndpoint("file-saga-queue", x =>
+
+                cfg.ReceiveEndpoint(settings.Value.SagaQueue, x =>
                 {
                     const int ConcurrencyLimit = 20; 
                     x.PrefetchCount = ConcurrencyLimit; 

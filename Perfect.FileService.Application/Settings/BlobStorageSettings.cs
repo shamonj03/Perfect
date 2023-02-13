@@ -1,4 +1,4 @@
-﻿namespace Perfect.FileService.Api.Configuration.Models
+﻿namespace Perfect.FileService.Application.Settings
 {
     public class BlobStorageSettings
     {

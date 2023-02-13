@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Options;
-using Perfect.FileService.Api.Configuration.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Perfect.FileService.Api.Configuration

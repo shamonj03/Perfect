@@ -1,7 +1,7 @@
 ﻿using MassTransit;
 using Microsoft.Extensions.Options;
-using Perfect.AnalyzerService.Api.Configuration.Models;
 using Perfect.AnalyzerService.Api.Consumers;
+using Perfect.AnalyzerService.Application.Settings;
 
 namespace Perfect.AnalyzerService.Api.Configuration
 {
@@ -24,7 +24,7 @@ namespace Perfect.AnalyzerService.Api.Configuration
                     var settings = context.GetRequiredService<IOptions<RabbitMqSettings>>();
                     cfg.Host(settings.Value.ConnectionString);
 
-                    cfg.ReceiveEndpoint("analyzer-service-analyze-command", y =>
+                    cfg.ReceiveEndpoint(settings.Value.AnalyzeFileCommandQueue, y =>
                     {
                         //y.ConfigureConsumeTopology = false;
                         //y.Bind("analyze-command");

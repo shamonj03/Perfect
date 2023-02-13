@@ -9,6 +9,13 @@
         <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Compile Remove="Endpoints\**" />
+      <Content Remove="Endpoints\**" />
+      <EmbeddedResource Remove="Endpoints\**" />
+      <None Remove="Endpoints\**" />
+    </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="Asp.Versioning.Http" Version="7.0.0" />
 		<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="7.0.0" />
@@ -42,10 +49,6 @@
         <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       </Content>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Endpoints\V1\" />
     </ItemGroup>
 
 </Project>

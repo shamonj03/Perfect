@@ -1,5 +1,5 @@
 ﻿using Azure.Storage.Blobs;
-using Perfect.FileService.Domain.Models;
+using Perfect.FileService.Domain.Entities;
 using Perfect.FileService.Domain.Services;
 
 namespace Perfect.FileService.Infrastructure.Files

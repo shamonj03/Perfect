@@ -1,4 +1,4 @@
-﻿using Perfect.FileService.Domain.Models;
+﻿using Perfect.FileService.Domain.Entities;
 
 namespace Perfect.FileService.Domain.Services
 {

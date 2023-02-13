@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Perfect.SagaService.Application\Perfect.SagaService.Application.csproj" />
     <ProjectReference Include="..\Perfect.Messages\Perfect.Messages.csproj" />
   </ItemGroup>
 

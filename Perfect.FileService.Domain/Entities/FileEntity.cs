@@ -1,4 +1,4 @@
-﻿namespace Perfect.FileService.Domain.Models
+﻿namespace Perfect.FileService.Domain.Entities
 {
     public class FileEntity
     {

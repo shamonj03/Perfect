@@ -4,7 +4,7 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Text.Json;
 
-namespace Perfect.FileService.Api.Configuration.Models
+namespace Perfect.FileService.Api.Configuration
 {
     /// <summary>
     /// Represents the OpenAPI/Swashbuckle operation filter used to document information provided, but not used.

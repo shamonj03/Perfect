@@ -1,9 +1,8 @@
 ﻿using Azure.Storage.Blobs;
 using MassTransit;
 using Microsoft.Extensions.Options;
-using Perfect.FileService.Api.Configuration.Models;
 using Perfect.FileService.Api.Consumers;
-using Perfect.Messages.Events;
+using Perfect.FileService.Application.Settings;
 
 namespace Perfect.FileService.Api.Configuration
 {
@@ -35,7 +34,7 @@ namespace Perfect.FileService.Api.Configuration
                     cfg.Host(settings.Value.ConnectionString);
                     cfg.UseMessageData(messageRepository);
 
-                    cfg.ReceiveEndpoint("file-service-upload-command", y =>
+                    cfg.ReceiveEndpoint(settings.Value.FileUploadCommandQueue, y =>
                     {
                         y.ConfigureConsumer<FileUploadConsumer>(context);
                     });

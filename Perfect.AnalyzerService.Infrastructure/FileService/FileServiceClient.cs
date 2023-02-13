@@ -1,17 +1,19 @@
-﻿using Perfect.AnalyzerService.Application.FileService;
+﻿using Microsoft.Extensions.Options;
+using Perfect.AnalyzerService.Application.FileService;
 using Perfect.AnalyzerService.Application.FileService.Models;
-using System.Net.Http.Json;
-using System.Text;
+using Perfect.AnalyzerService.Application.Settings;
 using System.Web;
 
-namespace Perfect.AnalyzerService.Infrastructure.HttpClients
+namespace Perfect.AnalyzerService.Infrastructure.FileService
 {
     public class FileServiceClient : IFileServiceClient
     {
+        private readonly IOptions<FileServiceSettings> _options;
         private readonly HttpClient _httpClient;
 
-        public FileServiceClient(HttpClient httpClient)
+        public FileServiceClient(IOptions<FileServiceSettings> options, HttpClient httpClient)
         {
+            _options = options;
             _httpClient = httpClient;
         }
 
@@ -21,7 +23,7 @@ namespace Perfect.AnalyzerService.Infrastructure.HttpClients
             {
                 var queryBuilder = HttpUtility.ParseQueryString(string.Empty);
                 queryBuilder["FileName"] = fileName;
-                return new HttpRequestMessage(HttpMethod.Get, $"api/v1/files?{queryBuilder}");
+                return new HttpRequestMessage(HttpMethod.Get, $"{_options.Value.FileEndpoint}?{queryBuilder}");
             }
 
             var request = await _httpClient.SendAsync(CreateMessage(), cancellationToken);

@@ -1,7 +1,7 @@
 ﻿using AutoFixture;
 using AutoFixture.AutoMoq;
 using Azure.Storage.Blobs;
-using Perfect.FileService.Domain.Models;
+using Perfect.FileService.Domain.Entities;
 using Perfect.FileService.Infrastructure.Files;
 using Shouldly;
 using System.Text;

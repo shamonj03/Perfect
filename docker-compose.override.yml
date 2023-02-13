@@ -24,11 +24,15 @@ services:
   perfect.sagaservice.host:
     environment:
       - DOTNET_ENVIRONMENT=Development
+      - ConnectionStrings__RabbitMq=amqp://guest:guest@host.docker.internal:5672/
+      - ConnectionStrings__Mongo=mongodb://host.docker.internal:27017/
 
   perfect.fileservice.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ConnectionStrings__BlobStorage=AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;DefaultEndpointsProtocol=http;BlobEndpoint=http://host.docker.internal:10000/devstoreaccount1;
+      - ConnectionStrings__RabbitMq=amqp://guest:guest@host.docker.internal:5672/
     ports:
       - 7214:443
       - 5233:80
@@ -39,7 +43,9 @@ services:
   perfect.analyzerservice.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_URLS=https://+:443;http://+:80      
+      - ConnectionStrings__FileService=http://host.docker.internal:5233/
+      - ConnectionStrings__RabbitMq=amqp://guest:guest@host.docker.internal:5672/
     ports:
       - 5062:80
       - 7095:443

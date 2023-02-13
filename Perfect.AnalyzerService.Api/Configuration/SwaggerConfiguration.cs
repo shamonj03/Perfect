@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Options;
-using Perfect.AnalyzerService.Api.Configuration.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Perfect.AnalyzerService.Api.Configuration
