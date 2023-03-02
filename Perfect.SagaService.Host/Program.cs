@@ -62,18 +62,23 @@ await Host.CreateDefaultBuilder(args)
             //        e.Consumer<FileReceivedConsumer>();
             //    });
             //});
-
+            x.AddDelayedMessageScheduler();
             x.UsingRabbitMq((context, cfg) =>
             {
                 var settings = context.GetRequiredService<IOptions<RabbitMqSettings>>();
                 cfg.Host(settings.Value.ConnectionString);
+                cfg.UseDelayedMessageScheduler();
 
                 cfg.ReceiveEndpoint(settings.Value.SagaQueue, x =>
                 {
                     const int ConcurrencyLimit = 20; 
                     x.PrefetchCount = ConcurrencyLimit; 
-                    x.UseMessageRetry(r => r.Interval(5, 1000));
-
+                    x.UseMessageRetry(r => 
+                    {
+                        r.Interval(5, 1000);
+                        //r.Handle<MongoDbConcurrencyException>();
+                    });
+                    
                     x.UseInMemoryOutbox();
                     x.ConfigureSaga<FileState>(context, s =>
                     {

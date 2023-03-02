@@ -26,6 +26,7 @@ public class AnalyzeFileConsumer : IConsumer<AnalyzeFileCommand>
         // TODO: Handle file not found.
         var file = await _fileServiceClient.GetFileAsync(message.FileName, context.CancellationToken);
 
+        //await Task.Delay(100000);
         await Task.WhenAll(
             _oddLetterAnalyzerService.ExecuteAsync(new(message.CorrelationId, file.FileName, file.Content), context.CancellationToken),
             _bannedWordAnalyzerService.ExecuteAsync(new(message.CorrelationId, file.FileName, file.Content), context.CancellationToken)

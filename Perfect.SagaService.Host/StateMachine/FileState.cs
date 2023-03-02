@@ -18,5 +18,7 @@ namespace Perfect.SagaService.Host.StateMachine
         public int? OddLetterCount { get; set; }
 
         public int? BannedWordCount { get; set; }
+
+        public Guid? AnalyzedFileTimeoutTokenId { get; set; }
     }
 }
